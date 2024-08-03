@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import quizQuestions from '../../data/quizQuestions'; // Asegúrate de importar las preguntas del cuestionario
-import { AnswerOption } from '../../types/quizForm';
+import type { AnswerOption } from '../../types/quizForm';
 import Quiz from './Quiz';
 import Result from './Result';
 import { shuffle } from '../../lib/shufleArray';
 import '../../styles/App.css';
+import '../../styles/index.css';
 
 let checkFirst: boolean = false;
 interface AnswerConfing {
@@ -37,26 +38,30 @@ const ContainerQuiz = () => {
     }));
   }, []);
 
-  const handleAnswerSelected = (event: any) => {
+  const handleAnswerSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { questionId } = questionConfig;
+    const selectedValue: any = event.currentTarget.value;
 
+    // Handle the first question and apply genre filter
     if (questionId === 1 && !checkFirst) {
-      console.log('Chipote AnswerSelected', event.currentTarget.value);
-      const genre = event.currentTarget.value;
-      const filterAnwserOpt: any = quizQuestions.filter((answer: any) => answer.genre === genre || answer.genre === 'console');
+      const filteredAnswerOptions = quizQuestions.filter((answer) => answer.genre === selectedValue || answer.genre === 'console');
+
       setAnswerConfig((prev) => ({
         ...prev,
-        filterAnwserOpt,
-        checkFirstAnswer: true,
+        filterAnwserOpt: filteredAnswerOptions,
+        answer: selectedValue,
       }));
 
-      setTimeout(() => setNextQuestion(filterAnwserOpt, true), 300);
+      setTimeout(() => setNextQuestion(filteredAnswerOptions, true), 300);
       checkFirst = true;
       return;
     }
 
-    setUserAnswer(event.currentTarget.value);
+    // Handle subsequent questions
+    setUserAnswer(selectedValue);
     const { filterAnwserOpt } = answerConfig;
+
+    // Proceed to next question or show results
     if (questionId < filterAnwserOpt.length) {
       setTimeout(() => setNextQuestion(filterAnwserOpt, false), 300);
     } else {
@@ -71,23 +76,30 @@ const ContainerQuiz = () => {
     setAnswerConfig((prev) => ({
       ...prev,
       answersCount: updateAnswersCount,
+      answer,
     }));
   };
 
-  const setNextQuestion = (filterAnwserOpt = [...quizQuestions], skip: boolean) => {
+  const setNextQuestion = (filterAnswerOptions = [...quizQuestions], skip: boolean) => {
     const { questionId, counter } = questionConfig;
-    const sum = skip ? 0 : 1;
-    const newCounter: number = counter + sum;
-    const newQuestionId = questionId + sum;
 
-    const question = filterAnwserOpt[newCounter].question;
-    const answerOptions = filterAnwserOpt[newCounter].answers;
+    const increment = skip ? 0 : 1;
+    const newCounter = counter + increment;
+    const newQuestionId = questionId + increment;
 
-    setQuestionConfig({ counter: newCounter, questionId: newQuestionId, question });
+    const nextQuestion = filterAnswerOptions[newCounter].question;
+    const nextAnswerOptions = filterAnswerOptions[newCounter].answers;
+
+    setQuestionConfig({
+      counter: newCounter,
+      questionId: newQuestionId,
+      question: nextQuestion,
+    });
+
     setAnswerConfig((prev) => ({
       ...prev,
       answer: '',
-      answerOptions,
+      answerOptions: nextAnswerOptions,
     }));
   };
 
@@ -108,18 +120,15 @@ const ContainerQuiz = () => {
   };
 
   const { questionId, question } = questionConfig;
-  const { answer, answerOptions } = answerConfig;
+  const { answer, answerOptions, filterAnwserOpt } = answerConfig;
+  const questionTotal = filterAnwserOpt.length;
 
   return (
     <div className='App'>
       <div className={'App-header'}>
         <h2 className={''}>React Quiz</h2>
       </div>
-      {result ? (
-        <Result quizResult={result} />
-      ) : (
-        <Quiz answer={answer} answerOptions={answerOptions} questionId={questionId} question={question} questionTotal={quizQuestions.length} onAnswerSelected={handleAnswerSelected} />
-      )}
+      {result ? <Result quizResult={result} /> : <Quiz {...{ answer, answerOptions, questionId, question, questionTotal }} onAnswerSelected={handleAnswerSelected} />}
     </div>
   );
 };

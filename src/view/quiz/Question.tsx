@@ -1,5 +1,6 @@
 const Question = (props: any) => {
-  return <h2 className='question'>{props.content}</h2>;
+  const { content } = props;
+  return <h2 className='question'>{content}</h2>;
 };
 
 export default Question;

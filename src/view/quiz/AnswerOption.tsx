@@ -1,18 +1,10 @@
 const AnswerOption = (props: any) => {
+  const { answer, answerType, onAnswerSelected, answerContent } = props;
   return (
     <li className='answerOption'>
-      <input
-        type='radio'
-        className='radioCustomButton'
-        name='radioGroup'
-        checked={props.answerType === props.answer}
-        id={props.answerType}
-        value={props.answerType}
-        disabled={props.answer}
-        onChange={props.onAnswerSelected}
-      />
-      <label className='radioCustomLabel' htmlFor={props.answerType}>
-        {props.answerContent}
+      <input type='radio' className='radioCustomButton' name='radioGroup' checked={answerType === answer} id={answerType} value={answerType} disabled={answer} onChange={onAnswerSelected} />
+      <label className='radioCustomLabel' htmlFor={answerType}>
+        {answerContent}
       </label>
     </li>
   );

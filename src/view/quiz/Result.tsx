@@ -1,8 +1,10 @@
 const Result = (props: any) => {
+  const { quizResult } = props;
+
   return (
-    <div>
-      You prefer <strong>{props.quizResult}</strong>!
-    </div>
+    <>
+      You prefer <strong>{quizResult}</strong>!
+    </>
   );
 };
 
