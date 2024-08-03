@@ -1,4 +1,4 @@
-import { FilterValues } from '../../../types/propsFilter';
+/*import { FilterValues } from '../../../types/propsFilter';
 
 interface Props {
   Title: string;
@@ -22,4 +22,4 @@ export const Select = ({ Title, name, data, filterValues, onChange }: Props) => 
       </select>
     </div>
   );
-};
+};*/

@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/types/data/quizForm.ts"],
+  "include": ["src", "src/types/quizForm.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
