@@ -11,14 +11,13 @@ interface AnswerConfing {
   answer: '';
   answerOptions: AnswerOption[];
   filterAnwserOpt: any[];
+  answersCount: Record<string, number>;
 }
 
 const ContainerQuiz = () => {
-  const [answerConfig, setAnswerConfig] = useState<AnswerConfing>({ answer: '', answerOptions: [], filterAnwserOpt: [] });
-  // const [filterAnwserOpt, setFilterAnwserOpt] = useState<any[]>([]);
-  const [answersCount, setAnswersCount] = useState<Record<string, number>>({});
-  const [result, setResult] = useState('');
+  const [answerConfig, setAnswerConfig] = useState<AnswerConfing>({ answer: '', answerOptions: [], filterAnwserOpt: [], answersCount: {} });
   const [questionConfig, setQuestionConfig] = useState({ counter: 0, questionId: 1, question: '' });
+  const [result, setResult] = useState('');
 
   useEffect(() => {
     console.log('Chipote useEffect');
@@ -48,6 +47,7 @@ const ContainerQuiz = () => {
       setAnswerConfig((prev) => ({
         ...prev,
         filterAnwserOpt,
+        checkFirstAnswer: true,
       }));
 
       setTimeout(() => setNextQuestion(filterAnwserOpt, true), 300);
@@ -65,20 +65,16 @@ const ContainerQuiz = () => {
   };
 
   const setUserAnswer = (answer: any) => {
-    setAnswersCount((prevAnswersCount) => ({
-      ...prevAnswersCount,
-      [answer]: (prevAnswersCount[answer as keyof typeof prevAnswersCount] || 0) + 1,
-    }));
+    const { answersCount } = answerConfig;
+    const updateAnswersCount = { ...answersCount, [answer]: (answersCount[answer as keyof typeof answersCount] || 0) + 1 };
 
     setAnswerConfig((prev) => ({
       ...prev,
-      answer,
+      answersCount: updateAnswersCount,
     }));
   };
 
   const setNextQuestion = (filterAnwserOpt = [...quizQuestions], skip: boolean) => {
-    console.log('filterAwnser', filterAnwserOpt);
-
     const { questionId, counter } = questionConfig;
     const sum = skip ? 0 : 1;
     const newCounter: number = counter + sum;
@@ -93,11 +89,10 @@ const ContainerQuiz = () => {
       answer: '',
       answerOptions,
     }));
-
-    console.log('answerOptions chipote Next', answerOptions);
   };
 
   const getResults = () => {
+    const { answersCount } = answerConfig;
     const answersCountKeys = Object.keys(answersCount);
     const answersCountValues = answersCountKeys.map((key) => answersCount[key as keyof typeof answersCount]);
     const maxAnswerCount = Math.max.apply(null, answersCountValues);
