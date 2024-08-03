@@ -7,24 +7,23 @@ import { shuffle } from '../../lib/shufleArray';
 import '../../styles/App.css';
 
 let checkFirst: boolean = false;
+interface AnswerConfing {
+  answer: '';
+  answerOptions: AnswerOption[];
+  filterAnwserOpt: any[];
+}
 
 const ContainerQuiz = () => {
-  //const [counter, setCounter] = useState(0);
-  //const [questionId, setQuestionId] = useState(1);
-  //const [question, setQuestion] = useState('');
-  const [answerOptions, setAnswerOptions] = useState<AnswerOption[]>([]);
-  const [answer, setAnswer] = useState('');
+  const [answerConfig, setAnswerConfig] = useState<AnswerConfing>({ answer: '', answerOptions: [], filterAnwserOpt: [] });
+  // const [filterAnwserOpt, setFilterAnwserOpt] = useState<any[]>([]);
   const [answersCount, setAnswersCount] = useState<Record<string, number>>({});
   const [result, setResult] = useState('');
-  const [filterAwnser, setFilterAwnser] = useState<any[]>([]);
   const [questionConfig, setQuestionConfig] = useState({ counter: 0, questionId: 1, question: '' });
 
   useEffect(() => {
     console.log('Chipote useEffect');
     const shuffledAnswerOptions = quizQuestions.map((question: any) => shuffle(question.answers));
-    //setQuestion(quizQuestions[0].question);
     const question = quizQuestions[0].question;
-
     setQuestionConfig((prev) => {
       return {
         ...prev,
@@ -32,7 +31,11 @@ const ContainerQuiz = () => {
       };
     });
 
-    setAnswerOptions(shuffledAnswerOptions[0]);
+    const answerOptions = shuffledAnswerOptions[0];
+    setAnswerConfig((prev) => ({
+      ...prev,
+      answerOptions,
+    }));
   }, []);
 
   const handleAnswerSelected = (event: any) => {
@@ -41,19 +44,21 @@ const ContainerQuiz = () => {
     if (questionId === 1 && !checkFirst) {
       console.log('Chipote AnswerSelected', event.currentTarget.value);
       const genre = event.currentTarget.value;
-      const filterAwnser2: any = quizQuestions.filter((answer: any) => answer.genre === genre || answer.genre === 'console');
-      //console.log('filterAwnser', filterAwnser);
-      setFilterAwnser(filterAwnser2);
+      const filterAnwserOpt: any = quizQuestions.filter((answer: any) => answer.genre === genre || answer.genre === 'console');
+      setAnswerConfig((prev) => ({
+        ...prev,
+        filterAnwserOpt,
+      }));
 
-      setTimeout(() => setNextQuestion(filterAwnser2, true), 300);
+      setTimeout(() => setNextQuestion(filterAnwserOpt, true), 300);
       checkFirst = true;
       return;
     }
 
     setUserAnswer(event.currentTarget.value);
-
-    if (questionId < filterAwnser.length) {
-      setTimeout(() => setNextQuestion(filterAwnser, false), 300);
+    const { filterAnwserOpt } = answerConfig;
+    if (questionId < filterAnwserOpt.length) {
+      setTimeout(() => setNextQuestion(filterAnwserOpt, false), 300);
     } else {
       setTimeout(() => setResults(getResults()), 300);
     }
@@ -64,22 +69,32 @@ const ContainerQuiz = () => {
       ...prevAnswersCount,
       [answer]: (prevAnswersCount[answer as keyof typeof prevAnswersCount] || 0) + 1,
     }));
-    setAnswer(answer);
+
+    setAnswerConfig((prev) => ({
+      ...prev,
+      answer,
+    }));
   };
 
-  const setNextQuestion = (filterAwnser = [...quizQuestions], skip: boolean) => {
-    console.log('filterAwnser', filterAwnser);
+  const setNextQuestion = (filterAnwserOpt = [...quizQuestions], skip: boolean) => {
+    console.log('filterAwnser', filterAnwserOpt);
 
     const { questionId, counter } = questionConfig;
     const sum = skip ? 0 : 1;
     const newCounter: number = counter + sum;
     const newQuestionId = questionId + sum;
 
-    const question = filterAwnser[newCounter].question;
-    setQuestionConfig({ counter: newCounter, questionId: newQuestionId, question });
+    const question = filterAnwserOpt[newCounter].question;
+    const answerOptions = filterAnwserOpt[newCounter].answers;
 
-    setAnswerOptions(filterAwnser[newCounter].answers);
-    setAnswer('');
+    setQuestionConfig({ counter: newCounter, questionId: newQuestionId, question });
+    setAnswerConfig((prev) => ({
+      ...prev,
+      answer: '',
+      answerOptions,
+    }));
+
+    console.log('answerOptions chipote Next', answerOptions);
   };
 
   const getResults = () => {
@@ -98,6 +113,7 @@ const ContainerQuiz = () => {
   };
 
   const { questionId, question } = questionConfig;
+  const { answer, answerOptions } = answerConfig;
 
   return (
     <div className='App'>
