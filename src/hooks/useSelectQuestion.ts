@@ -4,26 +4,31 @@ import quizQuestions from '../data/quizQuestions';
 import { shuffle } from '../lib/shufleArray';
 
 interface AnswerConfing {
-  answer: '';
+  genre: string;
+  answer: string;
   answerOptions: AnswerOption[];
   filterAnwserOpt: any[];
   answersCount: Record<string, number>;
+  checkedAnswers: string[];
 }
 
 let checkFirst: boolean = false;
 
 export const useSelectQuestion = (getResults: any, setResults: any) => {
-  const [answerConfig, setAnswerConfig] = useState<AnswerConfing>({ answer: '', answerOptions: [], filterAnwserOpt: [], answersCount: {} });
+  const [answerConfig, setAnswerConfig] = useState<AnswerConfing>({ genre: '', answer: '', answerOptions: [], filterAnwserOpt: [], answersCount: {}, checkedAnswers: [] });
   const [questionConfig, setQuestionConfig] = useState({ counter: 0, questionId: 1, question: '' });
 
   useEffect(() => {
     console.log('Chipote useEffect');
     const shuffledAnswerOptions = quizQuestions.map((question: any) => shuffle(question.answers));
     const question = quizQuestions[0].question;
+    const genre = quizQuestions[0].genre;
+
     setQuestionConfig((prev) => {
       return {
         ...prev,
         question,
+        genre,
       };
     });
 
@@ -35,33 +40,61 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
   }, []);
 
   const handleAnswerSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { answer, genre } = JSON.parse(event.target.value);
+    console.log('chipoteate este JSON', answer, genre);
+
+    console.log('handleAnswerSelected answer', answer);
+    let { checkedAnswers } = answerConfig;
+
+    if (checkedAnswers.includes(answer)) {
+      checkedAnswers = checkedAnswers.filter((answerSelected) => answerSelected !== answer);
+    } else {
+      checkedAnswers.push(answer);
+    }
+
+    setAnswerConfig((prev) => ({
+      ...prev,
+      answer,
+      checkedAnswers,
+    }));
+  };
+
+  const setNextSlide = () => {
     const { questionId } = questionConfig;
-    const selectedValue: any = event.currentTarget.value;
+    const { answer, filterAnwserOpt, checkedAnswers } = answerConfig;
+    //console.log('checkedAnswers', checkedAnswers);
+
+    if (!checkedAnswers.length && questionId === 1 && !checkFirst) {
+      console.log('Select Something');
+      return;
+    }
 
     // Handle the first question and apply genre filter
     if (questionId === 1 && !checkFirst) {
-      const filteredAnswerOptions = quizQuestions.filter((answer) => answer.genre === selectedValue || answer.genre === 'console');
+      const filteredAnswerOptions = quizQuestions.filter((answerOpt) => answerOpt.genre === answer || answerOpt.genre === 'console');
 
       setAnswerConfig((prev) => ({
         ...prev,
         filterAnwserOpt: filteredAnswerOptions,
-        answer: selectedValue,
       }));
 
-      setTimeout(() => setNextQuestion(filteredAnswerOptions, true), 300);
+      setNextQuestion(filteredAnswerOptions, true);
       checkFirst = true;
       return;
     }
 
+    if (!answer) {
+      return;
+    }
+
     // Handle subsequent questions
-    setUserAnswer(selectedValue);
-    const { filterAnwserOpt } = answerConfig;
+    setUserAnswer(answer);
 
     // Proceed to next question or show results
     if (questionId < filterAnwserOpt.length) {
-      setTimeout(() => setNextQuestion(filterAnwserOpt, false), 300);
+      setNextQuestion(filterAnwserOpt, false);
     } else {
-      setTimeout(() => setResults(getResults(answerConfig)), 300);
+      setResults(getResults(answerConfig));
     }
   };
 
@@ -85,6 +118,7 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
 
     const nextQuestion = filterAnswerOptions[newCounter].question;
     const nextAnswerOptions = filterAnswerOptions[newCounter].answers;
+    const nextGenre = filterAnswerOptions[newCounter].genre;
 
     setQuestionConfig({
       counter: newCounter,
@@ -96,12 +130,14 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
       ...prev,
       answer: '',
       answerOptions: nextAnswerOptions,
+      genre: nextGenre,
     }));
   };
 
   return {
     answerConfig,
     questionConfig,
+    setNextSlide,
     handleAnswerSelected,
   };
 };

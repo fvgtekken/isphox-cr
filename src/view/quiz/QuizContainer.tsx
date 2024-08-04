@@ -7,10 +7,8 @@ import '../../styles/index.css';
 
 const QuizContainer = () => {
   const { result, getResults, setResults } = useResult();
-  const { answerConfig, questionConfig, handleAnswerSelected } = useSelectQuestion(getResults, setResults);
-
-  const { questionId, question } = questionConfig;
-  const { answer, answerOptions, filterAnwserOpt } = answerConfig;
+  const { answerConfig, questionConfig, setNextSlide, handleAnswerSelected } = useSelectQuestion(getResults, setResults);
+  const { filterAnwserOpt } = answerConfig;
   const questionTotal = filterAnwserOpt.length;
 
   return (
@@ -18,9 +16,10 @@ const QuizContainer = () => {
       <div className={'App-header'}>
         <h2 className={''}>React Quiz</h2>
       </div>
-      {result ? <Result quizResult={result} /> : <Quiz {...{ answer, answerOptions, questionId, question, questionTotal }} onAnswerSelected={handleAnswerSelected} />}
+      {result ? <Result quizResult={result} /> : <Quiz {...{ ...answerConfig, ...questionConfig, questionTotal, setNextSlide }} onAnswerSelected={handleAnswerSelected} />}
     </div>
   );
 };
 
 export default QuizContainer;
+//      {result ? <Result quizResult={result} /> : <Quiz {...{ answer, checkedAnswers, answerOptions, questionId, question, questionTotal, setNextSlide }} onAnswerSelected={handleAnswerSelected} />}
