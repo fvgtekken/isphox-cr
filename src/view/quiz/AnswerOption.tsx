@@ -1,6 +1,5 @@
 const AnswerOption = (props: any) => {
-  const {  genre, type, checkedAnswers, answerType, onAnswerSelected, answerContent } = props;
-  const chipoteValue = { answer: answerType, genre };
+  const { genre, type, checkedAnswers, answerType, onAnswerSelected, answerContent } = props;
 
   return (
     <li className='answerOption'>
@@ -10,7 +9,7 @@ const AnswerOption = (props: any) => {
         name='radioGroup'
         checked={checkedAnswers.includes(answerType)}
         id={answerType}
-        value={JSON.stringify(chipoteValue)}
+        value={JSON.stringify({ answer: answerType, genre })}
         disabled={false}
         onChange={onAnswerSelected}
       />

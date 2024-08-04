@@ -9,7 +9,8 @@ const Quiz = ({ genre, checkedAnswers, answerOptions, questionId, question, ques
 
   return (
     <div key={questionId}>
-      <QuestionCount counter={questionId} total={questionTotal} />
+      {genre == defaultGenre ? <div> Welcome!, Please select yout genre games</div> : <QuestionCount counter={questionId} total={questionTotal} />}
+
       <Question content={question} />
       <ul className='answerOptions'>
         {answerOptions.map((key: any) => (

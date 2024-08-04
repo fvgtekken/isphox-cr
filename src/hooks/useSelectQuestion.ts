@@ -73,6 +73,7 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
     // Handle the first question and apply genre filter
     if (genre === defaultGenre) {
       const filteredAnswerOptions = quizQuestions.filter((answerOpt) => answerOpt.genre === answer || answerOpt.genre === 'console');
+      console.log('filteredAnswerOptions', filteredAnswerOptions);
 
       setAnswerConfig((prev) => ({
         ...prev,
@@ -112,10 +113,16 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
 
   const setNextQuestion = (filterAnswerOptions = [...quizQuestions]) => {
     const { questionId, counter } = questionConfig;
+    const { genre } = answerConfig;
 
-    const increment = 1;
-    const newCounter = counter + increment;
-    const newQuestionId = questionId + increment;
+    let newCounter = 0;
+    let newQuestionId = 1;
+
+    if (genre !== defaultGenre) {
+      const increment = 1;
+      newCounter = counter + increment;
+      newQuestionId = questionId + increment;
+    }
 
     const nextQuestion = filterAnswerOptions[newCounter].question;
     const nextAnswerOptions = filterAnswerOptions[newCounter].answers;
