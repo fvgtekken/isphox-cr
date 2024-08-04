@@ -22,4 +22,4 @@ const QuizContainer = () => {
 };
 
 export default QuizContainer;
-//      {result ? <Result quizResult={result} /> : <Quiz {...{ answer, checkedAnswers, answerOptions, questionId, question, questionTotal, setNextSlide }} onAnswerSelected={handleAnswerSelected} />}
+

@@ -1,3 +1,5 @@
+export const defaultGenre: string = 'initial';
+
 const quizQuestions = [
   {
     question: 'What genre of games do you prefer?',

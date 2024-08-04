@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { AnswerOption } from '../types/quizForm';
-import quizQuestions from '../data/quizQuestions';
+import quizQuestions, { defaultGenre } from '../data/quizQuestions';
 import { shuffle } from '../lib/shufleArray';
 
 interface AnswerConfing {
@@ -11,8 +11,6 @@ interface AnswerConfing {
   answersCount: Record<string, number>;
   checkedAnswers: string[];
 }
-
-let checkFirst: boolean = false;
 
 export const useSelectQuestion = (getResults: any, setResults: any) => {
   const [answerConfig, setAnswerConfig] = useState<AnswerConfing>({ genre: '', answer: '', answerOptions: [], filterAnwserOpt: [], answersCount: {}, checkedAnswers: [] });
@@ -41,14 +39,16 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
 
   const handleAnswerSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { answer, genre } = JSON.parse(event.target.value);
-    console.log('chipoteate este JSON', answer, genre);
-
-    console.log('handleAnswerSelected answer', answer);
     let { checkedAnswers } = answerConfig;
 
-    if (checkedAnswers.includes(answer)) {
+    if (checkedAnswers.includes(answer) && genre === defaultGenre) {
       checkedAnswers = checkedAnswers.filter((answerSelected) => answerSelected !== answer);
-    } else {
+    } else if (genre === defaultGenre) {
+      checkedAnswers.push(answer);
+    }
+
+    if (genre !== defaultGenre) {
+      checkedAnswers = [];
       checkedAnswers.push(answer);
     }
 
@@ -56,21 +56,22 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
       ...prev,
       answer,
       checkedAnswers,
+      genre,
     }));
   };
 
   const setNextSlide = () => {
     const { questionId } = questionConfig;
-    const { answer, filterAnwserOpt, checkedAnswers } = answerConfig;
+    const { genre, answer, filterAnwserOpt, checkedAnswers } = answerConfig;
     //console.log('checkedAnswers', checkedAnswers);
 
-    if (!checkedAnswers.length && questionId === 1 && !checkFirst) {
+    if (!checkedAnswers.length && genre === defaultGenre) {
       console.log('Select Something');
       return;
     }
 
     // Handle the first question and apply genre filter
-    if (questionId === 1 && !checkFirst) {
+    if (genre === defaultGenre) {
       const filteredAnswerOptions = quizQuestions.filter((answerOpt) => answerOpt.genre === answer || answerOpt.genre === 'console');
 
       setAnswerConfig((prev) => ({
@@ -78,12 +79,12 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
         filterAnwserOpt: filteredAnswerOptions,
       }));
 
-      setNextQuestion(filteredAnswerOptions, true);
-      checkFirst = true;
+      setNextQuestion(filteredAnswerOptions);
       return;
     }
 
     if (!answer) {
+      console.log('Select Something');
       return;
     }
 
@@ -92,7 +93,7 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
 
     // Proceed to next question or show results
     if (questionId < filterAnwserOpt.length) {
-      setNextQuestion(filterAnwserOpt, false);
+      setNextQuestion(filterAnwserOpt);
     } else {
       setResults(getResults(answerConfig));
     }
@@ -109,10 +110,10 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
     }));
   };
 
-  const setNextQuestion = (filterAnswerOptions = [...quizQuestions], skip: boolean) => {
+  const setNextQuestion = (filterAnswerOptions = [...quizQuestions]) => {
     const { questionId, counter } = questionConfig;
 
-    const increment = skip ? 0 : 1;
+    const increment = 1;
     const newCounter = counter + increment;
     const newQuestionId = questionId + increment;
 
@@ -129,6 +130,7 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
     setAnswerConfig((prev) => ({
       ...prev,
       answer: '',
+      checkedAnswers: [],
       answerOptions: nextAnswerOptions,
       genre: nextGenre,
     }));

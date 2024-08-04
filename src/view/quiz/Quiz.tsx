@@ -1,13 +1,11 @@
 import Question from './Question';
 import QuestionCount from './QuestionCount';
+import { defaultGenre } from '../../data/quizQuestions';
 import AnswerOption from './AnswerOption';
 import { Button } from '../common/Button';
 
-const Quiz = ({ answer, checkedAnswers, answerOptions, questionId, question, questionTotal, setNextSlide, onAnswerSelected }: any) => {
-  const typeInput = 'checkbox';
-
-  //const typeInput = questionId === 1 ? 'checkbox' : 'radio';
-  // console.log('typeInput', typeInput);
+const Quiz = ({ genre, checkedAnswers, answerOptions, questionId, question, questionTotal, setNextSlide, onAnswerSelected }: any) => {
+  const typeInput = genre === defaultGenre ? 'checkbox' : 'radio';
 
   return (
     <div key={questionId}>
@@ -16,11 +14,11 @@ const Quiz = ({ answer, checkedAnswers, answerOptions, questionId, question, que
       <ul className='answerOptions'>
         {answerOptions.map((key: any) => (
           <AnswerOption
+            genre={genre}
             type={typeInput}
             key={key.content}
             answerContent={key.content}
             answerType={key.type}
-            answer={answer}
             questionId={questionId}
             checkedAnswers={checkedAnswers}
             onAnswerSelected={onAnswerSelected}

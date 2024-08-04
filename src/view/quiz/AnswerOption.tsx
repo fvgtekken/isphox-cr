@@ -1,6 +1,6 @@
 const AnswerOption = (props: any) => {
-  const { answer, type, checkedAnswers, answerType, onAnswerSelected, answerContent } = props;
-  const chipoteValue = { answer: answerType, genre: 'yanque' };
+  const {  genre, type, checkedAnswers, answerType, onAnswerSelected, answerContent } = props;
+  const chipoteValue = { answer: answerType, genre };
 
   return (
     <li className='answerOption'>
