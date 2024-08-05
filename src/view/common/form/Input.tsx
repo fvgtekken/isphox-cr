@@ -13,6 +13,8 @@ interface HtmlDirective<T extends FieldValues> {
   name?: Path<T>;
   className?: string;
   type?: string;
+  min?: string | number;
+  max?: string | number;
   value?: string | number;
   disable?: boolean;
   htmlFor?: string;
@@ -32,15 +34,12 @@ interface Props<T extends FieldValues> {
   htmlDirectiveLabel?: HtmlDirectiveLabel;
 }
 
-export const InputField = <T extends FieldValues>({ register, validation, htmlDirective, htmlDirectiveLabel }: Props<T>) => {
+export const Input = <T extends FieldValues>({ register, validation, htmlDirective, htmlDirectiveLabel }: Props<T>) => {
   const { name } = htmlDirective;
   const { label, htmlFor, className } = htmlDirectiveLabel || {};
 
   return (
     <>
-      <label className={className} htmlFor={htmlFor}>
-        {label}
-      </label>
       {register && name ? (
         <>
           <input {...htmlDirective} {...register(name, { ...validation })}></input>
@@ -48,6 +47,9 @@ export const InputField = <T extends FieldValues>({ register, validation, htmlDi
       ) : (
         <input {...htmlDirective}></input>
       )}
+      <label className={className} htmlFor={htmlFor}>
+        {label}
+      </label>
     </>
   );
 };

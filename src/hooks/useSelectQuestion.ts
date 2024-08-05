@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import type { AnswerOption } from '../types/quizForm';
 import quizQuestions, { defaultGenre } from '../data/quizQuestions';
-import { shuffle } from '../lib/shufleArray';
+
+//import { shuffle } from '../lib/shufleArray';
 
 interface AnswerConfing {
   genre: string;
@@ -10,15 +11,24 @@ interface AnswerConfing {
   filterAnwserOpt: any[];
   answersCount: Record<string, number>;
   checkedAnswers: string[];
+  errorAnswer: string;
 }
 
 export const useSelectQuestion = (getResults: any, setResults: any) => {
-  const [answerConfig, setAnswerConfig] = useState<AnswerConfing>({ genre: '', answer: '', answerOptions: [], filterAnwserOpt: [], answersCount: {}, checkedAnswers: [] });
+  const [answerConfig, setAnswerConfig] = useState<AnswerConfing>({
+    genre: '',
+    answer: '',
+    answerOptions: [],
+    filterAnwserOpt: [],
+    answersCount: {},
+    checkedAnswers: [],
+    errorAnswer: '',
+  });
   const [questionConfig, setQuestionConfig] = useState({ counter: 0, questionId: 1, question: '' });
 
   useEffect(() => {
     console.log('Chipote useEffect');
-    const shuffledAnswerOptions = quizQuestions.map((question: any) => shuffle(question.answers));
+    const shuffledAnswerOptions = quizQuestions.map((question: any) => question.answers);
     const question = quizQuestions[0].question;
     const genre = quizQuestions[0].genre;
 
@@ -36,6 +46,19 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
       answerOptions,
     }));
   }, []);
+
+  const handleInputField = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('handle input', event.target.value);
+    console.log('handle name', event.target.name);
+
+    const answer = event.target.value;
+    //const typeContent = event.target.name;
+
+    setAnswerConfig((prev) => ({
+      ...prev,
+      answer,
+    }));
+  };
 
   const handleAnswerSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { answer, genre } = JSON.parse(event.target.value);
@@ -61,18 +84,21 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
   };
 
   const setNextSlide = () => {
-    const { questionId } = questionConfig;
-    const { genre, answer, filterAnwserOpt, checkedAnswers } = answerConfig;
+    const { questionId, counter } = questionConfig;
+    const { genre, filterAnwserOpt, checkedAnswers } = answerConfig;
+    let { answer } = answerConfig;
     //console.log('checkedAnswers', checkedAnswers);
+    console.log('genre', genre);
+    console.log('answer', answer);
 
     if (!checkedAnswers.length && genre === defaultGenre) {
-      console.log('Select Something');
+      // console.log('Select Something');
       return;
     }
 
     // Handle the first question and apply genre filter
     if (genre === defaultGenre) {
-      const filteredAnswerOptions = quizQuestions.filter((answerOpt) => answerOpt.genre === answer || answerOpt.genre === 'console');
+      const filteredAnswerOptions = quizQuestions.filter((question) => checkedAnswers.includes(question.genre) || question.genre === 'console');
       console.log('filteredAnswerOptions', filteredAnswerOptions);
 
       setAnswerConfig((prev) => ({
@@ -86,7 +112,33 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
 
     if (!answer) {
       console.log('Select Something');
+      setAnswerConfig((prev) => ({
+        ...prev,
+        errorAnswer: 'Please Select an Option',
+      }));
       return;
+    }
+
+    let consoleExists: any = [];
+    if (genre === 'console') {
+      console.log('Estas en console, con esta answer->', answer);
+      console.log('options->', filterAnwserOpt[counter].answers);
+
+      consoleExists = filterAnwserOpt[counter].answers.filter((opt: any) => opt.content.toLowerCase().replace(/\s+/g, '') === answer.toLowerCase().replace(/\s+/g, ''));
+      console.log('Exite la consola ->', consoleExists);
+    }
+
+    if (!consoleExists.length && genre === 'console') {
+      console.log('No existe la consola');
+      setAnswerConfig((prev) => ({
+        ...prev,
+        errorAnswer: `We dont have an this console in out db`,
+      }));
+      return;
+    }
+
+    if (consoleExists.length && genre === 'console') {
+      answer = consoleExists[0].type;
     }
 
     // Handle subsequent questions
@@ -101,12 +153,15 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
   };
 
   const setUserAnswer = (answer: any) => {
+    console.log('setUserAnswer answer', answer);
     const { answersCount } = answerConfig;
+
     const updateAnswersCount = { ...answersCount, [answer]: (answersCount[answer as keyof typeof answersCount] || 0) + 1 };
+    console.log('setUserAnswer updateAnswersCount', updateAnswersCount);
 
     setAnswerConfig((prev) => ({
       ...prev,
-      answersCount: updateAnswersCount,
+      answersCount: { ...updateAnswersCount },
       answer,
     }));
   };
@@ -137,6 +192,7 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
     setAnswerConfig((prev) => ({
       ...prev,
       answer: '',
+      errorAnswer: '',
       checkedAnswers: [],
       answerOptions: nextAnswerOptions,
       genre: nextGenre,
@@ -148,5 +204,6 @@ export const useSelectQuestion = (getResults: any, setResults: any) => {
     questionConfig,
     setNextSlide,
     handleAnswerSelected,
+    handleInputField,
   };
 };
