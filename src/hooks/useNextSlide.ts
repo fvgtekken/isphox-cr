@@ -23,7 +23,7 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
     // Initial Game Genre
     /****************************************************/
     if (!checkedAnswers.length && genre === defaultGenre) {
-      setAnswerConfig((prev: any) => ({
+      setAnswerConfig((prev) => ({
         ...prev,
         errorAnswer: 'Please select your favorite genre game',
       }));
@@ -33,7 +33,7 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
     if (genre === defaultGenre) {
       const filteredAnswerOptions = quizQuestions.filter((question) => checkedAnswers.includes(question.genre) || question.genre === 'console');
 
-      setAnswerConfig((prev: any) => ({
+      setAnswerConfig((prev) => ({
         ...prev,
         filterAnwserOpt: filteredAnswerOptions,
       }));
@@ -45,7 +45,7 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
     // For the others genres
     /****************************************************/
     if (!answer && genre !== defaultGenre) {
-      setAnswerConfig((prev: any) => ({
+      setAnswerConfig((prev) => ({
         ...prev,
         errorAnswer: 'Please Select an Option',
       }));
@@ -56,11 +56,11 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
     //****************************************************** */
     let consoleExists: any = [];
     if (genre === 'console') {
-      consoleExists = filterAnwserOpt[counter].answers.filter((opt: any) => opt.content.toLowerCase().replace(/\s+/g, '') === answer.toLowerCase().replace(/\s+/g, ''));
+      consoleExists = filterAnwserOpt[counter].answers.filter((opt: any) => opt.content.toLowerCase().replace(/[\s-]+/g, '') === answer.toLowerCase().replace(/[\s-]+/g, ''));
     }
 
     if (!consoleExists.length && genre === 'console') {
-      setAnswerConfig((prev: any) => ({
+      setAnswerConfig((prev) => ({
         ...prev,
         errorAnswer: `We dont have an this console in our db`,
       }));
@@ -78,7 +78,7 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
     if (questionId < filterAnwserOpt.length) {
       setNextQuestion(filterAnwserOpt);
     } else {
-      setQuestionConfig((prev: any) => ({
+      setQuestionConfig((prev) => ({
         ...prev,
         counter: counter + 1,
       }));
@@ -87,10 +87,10 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
   };
 
   // Get user ponits to get the final answer
-  const setUserStatistics = (answer: any) => {
+  const setUserStatistics = (answer: string) => {
     const { answersCount } = answerConfig;
     const updateAnswersCount = { ...answersCount, [answer]: (answersCount[answer as keyof typeof answersCount] || 0) + 1 };
-    setAnswerConfig((prev: any) => ({
+    setAnswerConfig((prev) => ({
       ...prev,
       answersCount: { ...updateAnswersCount },
       answer,
@@ -122,7 +122,7 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
       title: nextTitle,
     });
 
-    setAnswerConfig((prev: any) => ({
+    setAnswerConfig((prev) => ({
       ...prev,
       answer: '',
       errorAnswer: '',
