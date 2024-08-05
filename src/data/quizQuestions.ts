@@ -1,6 +1,38 @@
 export const defaultGenre: string = 'initial';
 
-const quizQuestions = [
+interface HtmlDirective {
+  type: 'checkbox' | 'radio' | 'text';
+  name: string;
+  className: string;
+  disabled: boolean;
+  placeholder?: string;
+}
+
+// Define el tipo para htmlDirectiveLabel
+interface HtmlDirectiveLabel {
+  className: string;
+  label: string;
+}
+
+// Define el tipo para las respuestas
+interface Answer {
+  type: string;
+  content: string;
+  genre: string;
+  typeField: 'input' | 'none' | 'inputText';
+  htmlDirective: HtmlDirective;
+  htmlDirectiveLabel: HtmlDirectiveLabel;
+}
+
+// Define el tipo para las preguntas
+interface QuizQuestion {
+  title: string;
+  question: string;
+  genre: string;
+  answers: Answer[];
+}
+
+const quizQuestions: QuizQuestion[] = [
   {
     title: 'Game Genre',
     question: 'What genre of games do you prefer?',
