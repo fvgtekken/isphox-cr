@@ -1,8 +1,12 @@
-// Asegúrate de exportar AnswerConfing desde types/quizForm
 import { defaultGenre } from '../data/quizQuestions';
-import { AnswerConfing } from './useSelectQuestion';
+import { AnswerConfing } from './useQuestion';
 
-const useAnswerHandlers = (setAnswerConfig: React.Dispatch<React.SetStateAction<AnswerConfing>>, answerConfig: any) => {
+export interface UseAnswerHandlers {
+  handleInputField: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleAnswerSelected: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const useAnswerHandlers = (setAnswerConfig: React.Dispatch<React.SetStateAction<AnswerConfing>>, answerConfig: AnswerConfing): UseAnswerHandlers => {
   const handleInputField = (event: React.ChangeEvent<HTMLInputElement>) => {
     const answer = event.target.value;
 
@@ -17,17 +21,16 @@ const useAnswerHandlers = (setAnswerConfig: React.Dispatch<React.SetStateAction<
     let { checkedAnswers } = answerConfig;
 
     if (checkedAnswers.includes(answer) && genre === defaultGenre) {
-      checkedAnswers = checkedAnswers.filter((answerSelected: any) => answerSelected !== answer);
+      checkedAnswers = checkedAnswers.filter((answerSelected) => answerSelected !== answer);
     } else if (genre === defaultGenre) {
       checkedAnswers.push(answer);
     }
 
     if (genre !== defaultGenre) {
-      checkedAnswers = [];
-      checkedAnswers.push(answer);
+      checkedAnswers = [answer];
     }
 
-    setAnswerConfig((prev: any) => ({
+    setAnswerConfig((prev) => ({
       ...prev,
       answer,
       checkedAnswers,
@@ -40,5 +43,3 @@ const useAnswerHandlers = (setAnswerConfig: React.Dispatch<React.SetStateAction<
     handleAnswerSelected,
   };
 };
-
-export default useAnswerHandlers;

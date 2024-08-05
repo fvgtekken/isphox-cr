@@ -1,12 +1,16 @@
 import Question from './Question';
 import AnswerOption from './AnswerOption';
 import { Button } from '../common/Button';
+import Header from '../common/Header';
 
-const Quiz = ({ genre, checkedAnswers, answerOptions, errorAnswer, questionId, question, setNextSlide, onAnswerSelected, handleInputField }: any) => {
+const Quiz = ({ genre, title, checkedAnswers, answerOptions, errorAnswer, questionId, question, setNextSlide, handleAnswerSelected, handleInputField }: any) => {
   return (
     <div key={questionId}>
-      
+      <Header className=''>
+        <h3>{title}</h3>
+      </Header>
       <Question content={question} />
+
       <ul className='answerOptions'>
         {answerOptions.map((opt: any) => (
           <AnswerOption
@@ -19,7 +23,7 @@ const Quiz = ({ genre, checkedAnswers, answerOptions, errorAnswer, questionId, q
             answerType={opt.type}
             questionId={questionId}
             checkedAnswers={checkedAnswers}
-            onAnswerSelected={onAnswerSelected}
+            handleAnswerSelected={handleAnswerSelected}
             handleInputField={handleInputField}
           />
         ))}

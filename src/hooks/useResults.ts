@@ -1,9 +1,16 @@
 import { useState } from 'react';
+import { AnswerConfing } from './useQuestion';
 
-export const useResult = () => {
-  const [result, setResult] = useState('');
+interface UseResult {
+  getResults: (answerConfig: AnswerConfing) => string[];
+  setResults: (result: string[]) => void;
+  result: string;
+}
 
-  const getResults = (answerConfig: any) => {
+export const useResult = (): UseResult => {
+  const [result, setResult] = useState<string>('');
+
+  const getResults = (answerConfig: AnswerConfing) => {
     const { answersCount } = answerConfig;
     const answersCountKeys = Object.keys(answersCount);
     const answersCountValues = answersCountKeys.map((key) => answersCount[key as keyof typeof answersCount]);
@@ -11,7 +18,7 @@ export const useResult = () => {
     return answersCountKeys.filter((key: any) => answersCount[key as keyof typeof answersCount] === maxAnswerCount);
   };
 
-  const setResults = (result: any) => {
+  const setResults = (result: string[]) => {
     setResult(result.length === 1 ? result[0] : 'Undetermined');
   };
 

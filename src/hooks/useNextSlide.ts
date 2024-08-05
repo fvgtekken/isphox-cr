@@ -1,17 +1,35 @@
 import quizQuestions, { defaultGenre } from '../data/quizQuestions';
+import { AnswerConfing, QuestionConfig } from './useQuestion';
 
-export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfig, answerConfig, setResults, getResults }:any) => {
+interface UseNextSlideProps {
+  setAnswerConfig: React.Dispatch<React.SetStateAction<AnswerConfing>>;
+  setQuestionConfig: React.Dispatch<React.SetStateAction<QuestionConfig>>;
+  questionConfig: QuestionConfig;
+  answerConfig: AnswerConfing;
+  setResults: (result: string[]) => void;
+  getResults: (answerConfig: AnswerConfing) => string[];
+}
+
+interface UseNextSlide {
+  setNextSlide: () => void | null;
+}
+
+export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfig, answerConfig, setResults, getResults }: UseNextSlideProps): UseNextSlide => {
   const setNextSlide = () => {
     const { questionId, counter } = questionConfig;
     const { genre, filterAnwserOpt, checkedAnswers } = answerConfig;
     let { answer } = answerConfig;
 
+    // Initial Game Genre
+    /****************************************************/
     if (!checkedAnswers.length && genre === defaultGenre) {
-      // console.log('Select Something');
+      setAnswerConfig((prev: any) => ({
+        ...prev,
+        errorAnswer: 'Please select your favorite genre game',
+      }));
       return;
     }
 
-    // Handle the first question and apply genre filter
     if (genre === defaultGenre) {
       const filteredAnswerOptions = quizQuestions.filter((question) => checkedAnswers.includes(question.genre) || question.genre === 'console');
 
@@ -24,8 +42,9 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
       return;
     }
 
-    if (!answer) {
-      console.log('Select Something');
+    // For the others genres
+    /****************************************************/
+    if (!answer && genre !== defaultGenre) {
       setAnswerConfig((prev: any) => ({
         ...prev,
         errorAnswer: 'Please Select an Option',
@@ -33,20 +52,17 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
       return;
     }
 
+    // For input field text
+    //****************************************************** */
     let consoleExists: any = [];
     if (genre === 'console') {
-      console.log('Estas en console, con esta answer->', answer);
-      console.log('options->', filterAnwserOpt[counter].answers);
-
       consoleExists = filterAnwserOpt[counter].answers.filter((opt: any) => opt.content.toLowerCase().replace(/\s+/g, '') === answer.toLowerCase().replace(/\s+/g, ''));
-      console.log('Exite la consola ->', consoleExists);
     }
 
     if (!consoleExists.length && genre === 'console') {
-      console.log('No existe la consola');
       setAnswerConfig((prev: any) => ({
         ...prev,
-        errorAnswer: `We dont have an this console in out db`,
+        errorAnswer: `We dont have an this console in our db`,
       }));
       return;
     }
@@ -55,10 +71,10 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
       answer = consoleExists[0].type;
     }
 
-    // Handle subsequent questions
-    setUserAnswer(answer);
+    setUserStatistics(answer);
 
     // Proceed to next question or show results
+    /*****************************************************/
     if (questionId < filterAnwserOpt.length) {
       setNextQuestion(filterAnwserOpt);
     } else {
@@ -70,13 +86,10 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
     }
   };
 
-  const setUserAnswer = (answer: any) => {
-    console.log('setUserAnswer answer', answer);
+  // Get user ponits to get the final answer
+  const setUserStatistics = (answer: any) => {
     const { answersCount } = answerConfig;
-
     const updateAnswersCount = { ...answersCount, [answer]: (answersCount[answer as keyof typeof answersCount] || 0) + 1 };
-    console.log('setUserAnswer updateAnswersCount', updateAnswersCount);
-
     setAnswerConfig((prev: any) => ({
       ...prev,
       answersCount: { ...updateAnswersCount },
@@ -100,11 +113,13 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
     const nextQuestion = filterAnswerOptions[newCounter].question;
     const nextAnswerOptions = filterAnswerOptions[newCounter].answers;
     const nextGenre = filterAnswerOptions[newCounter].genre;
+    const nextTitle = filterAnswerOptions[newCounter].title;
 
     setQuestionConfig({
       counter: newCounter,
       questionId: newQuestionId,
       question: nextQuestion,
+      title: nextTitle,
     });
 
     setAnswerConfig((prev: any) => ({

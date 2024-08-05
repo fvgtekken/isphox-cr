@@ -1,7 +1,7 @@
 import { Input, InputField } from '../common/form';
 
 const AnswerOption = (props: any) => {
-  const { typeField, htmlDirective, htmlDirectiveLabel, genre, checkedAnswers, answerType, onAnswerSelected, handleInputField, answerContent } = props;
+  const { typeField, htmlDirective, htmlDirectiveLabel, genre, checkedAnswers, answerType, handleAnswerSelected, handleInputField, answerContent } = props;
 
   return (
     <li className='answerOption'>
@@ -14,7 +14,7 @@ const AnswerOption = (props: any) => {
               id: answerType,
 
               value: JSON.stringify({ answer: answerType, genre }),
-              onChange: onAnswerSelected,
+              onChange: handleAnswerSelected,
             }}
             htmlDirectiveLabel={{ ...htmlDirectiveLabel, label: answerContent, htmlFor: answerType }}
           ></Input>

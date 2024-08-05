@@ -2,6 +2,7 @@ export const defaultGenre: string = 'initial';
 
 const quizQuestions = [
   {
+    title: 'Game Genre',
     question: 'What genre of games do you prefer?',
     genre: 'initial', // Indica que es la pregunta inicial para seleccionar el género
     answers: [
@@ -56,6 +57,7 @@ const quizQuestions = [
     ],
   },
   {
+    title: 'Game Franchise',
     question: 'What franchise would you rather play a game from?',
     genre: 'general', // Género general para preguntas no específicas de género
     answers: [
@@ -86,6 +88,7 @@ const quizQuestions = [
     ],
   },
   {
+    title: 'Choosing Console', // Playing With Friends
     question: 'Which Console would you prefer to play with friends?',
     genre: 'console',
     answers: [
@@ -124,6 +127,7 @@ const quizQuestions = [
     ],
   },
   {
+    title: 'Racing Franchises',
     question: 'Which of these Racing franchises would you prefer to play a game from?',
     genre: 'racing',
     answers: [
@@ -154,6 +158,7 @@ const quizQuestions = [
     ],
   },
   {
+    title: 'Best Games',
     question: 'Which of these games do you think is best?',
     genre: 'general',
     answers: [
@@ -184,6 +189,7 @@ const quizQuestions = [
     ],
   },
   {
+    title: 'Choose Favorite Console',
     question: 'What console would you prefer to own?',
     genre: 'console',
     answers: [
@@ -222,6 +228,7 @@ const quizQuestions = [
     ],
   },
   {
+    title: 'FPS Game',
     question: 'Which first-person shooter game do you prefer?',
     genre: 'first-person-shooter',
     answers: [
@@ -252,6 +259,7 @@ const quizQuestions = [
     ],
   },
   {
+    title: 'Platformer Game',
     question: 'Which platformer game do you prefer?',
     genre: 'platformer',
     answers: [
@@ -282,6 +290,7 @@ const quizQuestions = [
     ],
   },
   {
+    title: 'Role-Playing Game',
     question: 'Which Role-Playing game do you prefer?',
     genre: 'role-playing',
     answers: [
@@ -312,6 +321,7 @@ const quizQuestions = [
     ],
   },
   {
+    title: 'Action-Adventure Game',
     question: 'Which Action-Adventure game do you prefer?',
     genre: 'action-adventure',
     answers: [
