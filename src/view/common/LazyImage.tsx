@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 
-const LazyImage = ({ src, onLoad }: any) => {
+export interface PropsLazyImage {
+  src: string;
+  onLoad: () => void;
+}
+
+const LazyImage = ({ src, onLoad }: PropsLazyImage) => {
   useEffect(() => {
     const img = new Image();
     img.src = src;

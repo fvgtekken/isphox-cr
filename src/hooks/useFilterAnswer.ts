@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import quizQuestions from '../data/quizQuestions';
+import quizQuestions from '../data/questions';
 
 const useFilterAnswers = () => {
   const [filteredAnswers, setFilteredAnswers] = useState(quizQuestions);

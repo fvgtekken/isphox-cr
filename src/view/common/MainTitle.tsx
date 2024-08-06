@@ -5,8 +5,8 @@ interface PropsHeader {
   children: ReactNode; // Mejor opción en lugar de 'any'
 }
 
-const Header = ({ children, className }: PropsHeader) => {
+const MainTitle = ({ children, className }: PropsHeader) => {
   return <div className={className}>{children}</div>;
 };
 
-export default Header;
+export default MainTitle;

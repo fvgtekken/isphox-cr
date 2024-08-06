@@ -1,7 +1,20 @@
 import { Input, InputField } from '../common/form';
 import '../../styles/input.css';
+import type { HtmlDirective, HtmlDirectiveLabel } from '../../data/questions';
 
-const AnswerOption = (props: any) => {
+interface PropsAnswerOption {
+  typeField: string;
+  htmlDirective: HtmlDirective;
+  htmlDirectiveLabel: HtmlDirectiveLabel;
+  genre: string;
+  answerType: string;
+  checkedAnswers: string[];
+  answerContent: string;
+  handleInputField: () => void;
+  handleAnswerSelected: () => void;
+}
+
+const AnswerOption = (props: PropsAnswerOption) => {
   const { typeField, htmlDirective, htmlDirectiveLabel, genre, checkedAnswers, answerType, handleAnswerSelected, handleInputField, answerContent } = props;
 
   return (

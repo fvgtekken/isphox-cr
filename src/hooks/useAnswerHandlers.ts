@@ -1,4 +1,4 @@
-import { defaultGenre } from '../data/quizQuestions';
+import { defaultGenre } from '../data/questions';
 import { AnswerConfing } from './useQuestion';
 
 export interface UseAnswerHandlers {

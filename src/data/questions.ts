@@ -1,15 +1,16 @@
 export const defaultGenre: string = 'initial';
 
-interface HtmlDirective {
+export interface HtmlDirective {
   type: 'checkbox' | 'radio' | 'text';
   name: string;
   className: string;
   disabled: boolean;
   placeholder?: string;
+  checked?: boolean;
 }
 
 // Define el tipo para htmlDirectiveLabel
-interface HtmlDirectiveLabel {
+export interface HtmlDirectiveLabel {
   className: string;
   label: string;
 }
@@ -120,6 +121,14 @@ const quizQuestions: QuizQuestion[] = [
         htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
         htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
       },
+      {
+        type: 'Sega',
+        content: 'Yakuza 0',
+        genre: 'action-adventure',
+        typeField: 'input',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
     ],
   },
   {
@@ -128,14 +137,7 @@ const quizQuestions: QuizQuestion[] = [
     question: 'Which Console would you prefer to play with friends?',
     genre: 'console',
     answers: [
-      {
-        type: 'Microsoft',
-        content: 'X-Box',
-        genre: 'console',
-        typeField: 'none',
-        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
-        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
-      },
+      // Nintendo Consoles
       {
         type: 'Nintendo',
         content: 'Nintendo 64',
@@ -145,6 +147,40 @@ const quizQuestions: QuizQuestion[] = [
         htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
       },
       {
+        type: 'Nintendo',
+        content: 'GameCube',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Nintendo',
+        content: 'Wii',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Nintendo',
+        content: 'Wii U',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Nintendo',
+        content: 'Switch',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+
+      // Sony Consoles
+      {
         type: 'Sony',
         content: 'Playstation 1',
         genre: 'console',
@@ -152,6 +188,124 @@ const quizQuestions: QuizQuestion[] = [
         htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
         htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
       },
+      {
+        type: 'Sony',
+        content: 'Playstation 2',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sony',
+        content: 'Playstation 3',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sony',
+        content: 'Playstation 4',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sony',
+        content: 'Playstation 5',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+
+      // Microsoft Consoles
+      {
+        type: 'Microsoft',
+        content: 'Xbox',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Microsoft',
+        content: 'Xbox 360',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Microsoft',
+        content: 'Xbox One',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Microsoft',
+        content: 'Xbox Series S',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Microsoft',
+        content: 'Xbox Series X',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+
+      // Sega Consoles
+      {
+        type: 'Sega',
+        content: 'Sega Master System',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sega',
+        content: 'Sega Genesis',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sega',
+        content: 'Sega Saturn',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sega',
+        content: 'Sega Dreamcast',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sega',
+        content: 'Sega Game Gear',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+
+      // Custom Console
       {
         type: 'Custom',
         content: 'your console',
@@ -192,6 +346,14 @@ const quizQuestions: QuizQuestion[] = [
         htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
         htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
       },
+      {
+        type: 'Sega',
+        content: 'OutRun',
+        genre: 'racing',
+        typeField: 'input',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
     ],
   },
   {
@@ -224,6 +386,14 @@ const quizQuestions: QuizQuestion[] = [
         htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
         htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
       },
+      {
+        type: 'Sega',
+        content: 'Shining Force II',
+        genre: 'role-playing',
+        typeField: 'input',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
     ],
   },
   {
@@ -232,9 +402,26 @@ const quizQuestions: QuizQuestion[] = [
     question: 'What console would you prefer to own?',
     genre: 'console',
     answers: [
+      // Nintendo Consoles
       {
-        type: 'Microsoft',
-        content: 'X-Box One',
+        type: 'Nintendo',
+        content: 'Nintendo 64',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Nintendo',
+        content: 'GameCube',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Nintendo',
+        content: 'Wii',
         genre: 'console',
         typeField: 'none',
         htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
@@ -249,6 +436,40 @@ const quizQuestions: QuizQuestion[] = [
         htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
       },
       {
+        type: 'Nintendo',
+        content: 'Switch',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+
+      // Sony Consoles
+      {
+        type: 'Sony',
+        content: 'Playstation 1',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sony',
+        content: 'Playstation 2',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sony',
+        content: 'Playstation 3',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
         type: 'Sony',
         content: 'Playstation 4',
         genre: 'console',
@@ -256,6 +477,100 @@ const quizQuestions: QuizQuestion[] = [
         htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
         htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
       },
+      {
+        type: 'Sony',
+        content: 'Playstation 5',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+
+      // Microsoft Consoles
+      {
+        type: 'Microsoft',
+        content: 'Xbox',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Microsoft',
+        content: 'Xbox 360',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Microsoft',
+        content: 'Xbox One',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Microsoft',
+        content: 'Xbox Series S',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Microsoft',
+        content: 'Xbox Series X',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+
+      // Sega Consoles
+      {
+        type: 'Sega',
+        content: 'Sega Master System',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sega',
+        content: 'Sega Genesis',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sega',
+        content: 'Sega Saturn',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sega',
+        content: 'Sega Dreamcast',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sega',
+        content: 'Sega Game Gear',
+        genre: 'console',
+        typeField: 'none',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+
+      // Custom Console
       {
         type: 'Custom',
         content: 'your console',
@@ -296,6 +611,14 @@ const quizQuestions: QuizQuestion[] = [
         htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
         htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
       },
+      {
+        type: 'Sega',
+        content: 'Virtua Cop',
+        genre: 'first-person shooter',
+        typeField: 'input',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
     ],
   },
   {
@@ -323,6 +646,14 @@ const quizQuestions: QuizQuestion[] = [
       {
         type: 'Sony',
         content: 'LittleBigPlanet',
+        genre: 'platformer',
+        typeField: 'input',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sega',
+        content: 'Sonic the Hedgehog',
         genre: 'platformer',
         typeField: 'input',
         htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
@@ -360,6 +691,14 @@ const quizQuestions: QuizQuestion[] = [
         htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
         htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
       },
+      {
+        type: 'Sega',
+        content: 'Phantasy Star IV',
+        genre: 'role-playing',
+        typeField: 'input',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
     ],
   },
   {
@@ -387,6 +726,14 @@ const quizQuestions: QuizQuestion[] = [
       {
         type: 'Sony',
         content: "Uncharted 4: A Thief's End",
+        genre: 'action-adventure',
+        typeField: 'input',
+        htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },
+        htmlDirectiveLabel: { className: 'radioCustomLabel', label: '' },
+      },
+      {
+        type: 'Sega',
+        content: 'Shinobi III: Return of the Ninja Master',
         genre: 'action-adventure',
         typeField: 'input',
         htmlDirective: { type: 'radio', name: 'radioGroup', className: 'radioCustomButton', disabled: false },

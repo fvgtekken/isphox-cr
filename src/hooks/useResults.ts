@@ -15,11 +15,12 @@ export const useResult = (): UseResult => {
     const answersCountKeys = Object.keys(answersCount);
     const answersCountValues = answersCountKeys.map((key) => answersCount[key as keyof typeof answersCount]);
     const maxAnswerCount = Math.max.apply(null, answersCountValues);
-    return answersCountKeys.filter((key: any) => answersCount[key as keyof typeof answersCount] === maxAnswerCount);
+    return answersCountKeys.filter((key) => answersCount[key] === maxAnswerCount);
   };
 
   const setResults = (result: string[]) => {
-    setResult(result.length === 1 ? result[0] : 'Undetermined');
+    const typeResult = result.length === 1 ? result[0] : 'Diverse Preferences';
+    setResult(typeResult);
   };
 
   return { getResults, setResults, result };

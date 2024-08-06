@@ -1,12 +1,11 @@
 import Quiz from './Quiz';
-import Result from './Result';
-import Header from '../common/Header';
+import Header from '../common/MainTitle';
 import ProgressBar from '../common/ProgressBar';
 import { useQuestion } from '../../hooks/useQuestion';
 import { useResult } from '../../hooks/useResults';
 import { useNextSlide } from '../../hooks/useNextSlide';
 import { useAnswerHandlers } from '../../hooks/useAnswerHandlers';
-import { defaultGenre } from '../../data/quizQuestions';
+import { defaultGenre } from '../../data/questions';
 import QuestionCount from './QuestionCount';
 import '../../styles/index.css';
 import '../../styles/App.css';
@@ -31,16 +30,16 @@ const QuizContainer = () => {
     <div>
       <Header className='App-header'>
         <h2>Quiz Game!</h2>
-      </Header>{' '}
+      </Header>
       <div className='panel-progress-bar'>
         {genre !== defaultGenre && (
           <>
             <ProgressBar counter={counter} total={questionTotal}></ProgressBar>
-            <QuestionCount counter={questionId} total={questionTotal} />  
+            <QuestionCount counter={questionId} total={questionTotal} />
           </>
         )}
       </div>
-      {result ? <Result quizResult={result} /> : <Quiz {...{ ...answerConfig, ...questionConfig, counter, questionTotal, setNextSlide, handleInputField, handleAnswerSelected }} />}
+      <Quiz {...{ ...answerConfig, ...questionConfig, result, counter, questionTotal, setNextSlide, handleInputField, handleAnswerSelected }} />
     </div>
   );
 };

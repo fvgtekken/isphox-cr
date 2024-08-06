@@ -1,4 +1,4 @@
-import quizQuestions, { Answer, defaultGenre } from '../data/quizQuestions';
+import quizQuestions, { Answer, defaultGenre } from '../data/questions';
 import { AnswerConfing, QuestionConfig } from './useQuestion';
 
 interface UseNextSlideProps {

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { AnswerOption } from '../types/quizForm';
-import quizQuestions from '../data/quizQuestions';
-//import { shuffle } from '../lib/shufleArray';
+import quizQuestions, { Answer } from '../data/questions';
 
 export interface QuestionConfig {
   counter: number;
@@ -15,7 +14,7 @@ export interface AnswerConfing {
   genre: string;
   answer: string;
   answerOptions: AnswerOption[];
-  filterAnwserOpt: any[];
+  filterAnwserOpt: Answer[];
   answersCount: Record<string, number>;
   checkedAnswers: string[];
   errorAnswer: string;
@@ -41,8 +40,7 @@ export const useQuestion = (): UseQuestion => {
   const [questionConfig, setQuestionConfig] = useState<QuestionConfig>({ counter: 0, questionId: 1, question: '', title: '', backgroundImageUrl: '' });
 
   useEffect(() => {
-    console.log('Chipote useEffect');
-    const shuffledAnswerOptions = quizQuestions.map((question: any) => question.answers);
+    const shuffledAnswerOptions = quizQuestions.map((question) => question.answers);
     const question = quizQuestions[0].question;
     const genre = quizQuestions[0].genre;
     const title = quizQuestions[0].title;
