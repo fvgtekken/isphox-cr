@@ -1,0 +1,113 @@
+.panel-container {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #700e96;
+  border-radius: 0px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-height: 480px;
+}
+
+.title-panel {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #6a0dad;
+  color: #fff;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 15px;
+}
+
+.question-panel {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  background-color: #043c95;
+  color: #fff;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button-panel {
+  width: 80%;
+  margin: 0 auto;
+
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.progress-panel {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #6a0dad;
+  color: #fff;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+}
+
+/**/
+
+@media (max-width: 900px) {
+  .panel-container {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #700e96;
+    border-radius: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 480px;
+    min-width: 387px;
+  }
+
+  .question-panel {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 5rem;
+    background-color: #043c95;
+    color: #fff;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 387px;
+  }
+
+  .title-panel {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #6a0dad;
+    color: #fff;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 15px;
+    min-width: 387px;
+  }
+
+  .progress-panel {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #6a0dad;
+    color: #fff;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+    min-width: 387px;
+  }
+}

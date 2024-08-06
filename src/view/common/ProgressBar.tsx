@@ -1,4 +1,4 @@
-import '../../styles/questionCount.css';
+import '../../styles/progressBar.css';
 
 interface PropsBar {
   total: number;
@@ -9,10 +9,8 @@ const ProgressBar = ({ total, counter }: PropsBar) => {
   const progress = (counter / total) * 100;
 
   return (
-    <div className='questionCount'>
-      <div className='progress-bar'>
-        <div className='progress-bar-fill' style={{ width: `${progress}%` }}></div>
-      </div>
+    <div className='progress-bar'>
+      <div className='progress-bar-fill' style={{ width: `${progress}%` }}></div>
     </div>
   );
 };

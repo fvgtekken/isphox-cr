@@ -17,22 +17,16 @@ code {
 body {
   margin: 0;
   padding: 0;
-  background: #eee;
   font-family: sans-serif;
-}
-
-.container {
-  position: relative;
-  max-width: 800px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 3px;
-}
-
-@media (min-width: 769px) {
-  .container {
-    margin: 2.5rem auto;
-  }
+  width: 100%;
+  height: 100%;
+  background-image: url('/questions3.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  background-color: rgba(39, 7, 61, 0.9); /* Adjust transparency here */
+  background: linear-gradient(135deg, rgba(39, 7, 61, 0.9), rgba(52, 14, 123, 0.9)), url('/questions3.jpg');
 }
 
 /* Result Component */
@@ -56,16 +50,16 @@ body {
 /* Question Component */
 .question {
   margin: 0;
-  padding: 0.5rem 2.5rem 1.5rem 2.5rem;
+  padding: 1.5rem 2.5rem 1.5rem 2.5rem;
 }
 
 /* AnswerOption Component */
 .answerOption {
-  border-top: 1px solid #eee;
+  /*border-top: 1px solid #eee;*/
 }
 
 .answerOption:hover {
-  background-color: #eefbfe;
+  /* background-color: #eefbfe;*/
 }
 
 .radioCustomButton {
@@ -76,6 +70,8 @@ body {
 
 .radioCustomButton,
 .radioCustomLabel {
+  font-weight: bold;
+  color: #390360;
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
@@ -92,7 +88,6 @@ body {
 
 .radioCustomButton ~ .radioCustomLabel:before {
   position: absolute;
-
   top: 20px;
   left: 38px;
   width: 28px;
@@ -108,9 +103,9 @@ body {
 
 .radioCustomButton:checked ~ .radioCustomLabel:before {
   content: '';
-  background: #8bc53f url(/icon-check.svg) no-repeat;
+  background: #361291 url(/icon-check.svg) no-repeat;
   background-size: 27px;
-  border-color: #8bc53f;
+  border-color: #080242;
 }
 
 /* Animation */
@@ -143,4 +138,44 @@ body {
 .fade-appear.fade-appear-active {
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
+}
+
+/* Media */
+@media (max-width: 1350px) {
+  .answerOptions {
+    position: relative;
+    margin: 0;
+    left: -20px;
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.9); /* Blanco con 20% de opacidad */
+    min-width: 200px;
+    min-height: 370px;
+  }
+}
+
+@media (max-width: 900px) {
+  .answerOptions {
+    position: relative;
+    margin: 0;
+    left: -20px;
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.9); /* Blanco con 20% de opacidad */
+    min-width: 200px;
+    min-height: 370px;
+  }
+
+  .question {
+    padding: 0.5rem 2.5rem 1.5rem 2.5rem;
+    min-width: 356px;
+    height: 80px;
+  }
+
+  .radioCustomLabel {
+    padding: 1.5rem 2.5rem 1.5rem 5rem;
+    font-weight: bold;
+    color: #000000;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+  }
 }

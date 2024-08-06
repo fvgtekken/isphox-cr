@@ -8,6 +8,7 @@ export interface QuestionConfig {
   questionId: number;
   question: string;
   title: string;
+  backgroundImageUrl: string;
 }
 
 export interface AnswerConfing {
@@ -37,7 +38,7 @@ export const useQuestion = (): UseQuestion => {
     checkedAnswers: [],
     errorAnswer: '',
   });
-  const [questionConfig, setQuestionConfig] = useState<QuestionConfig>({ counter: 0, questionId: 1, question: '', title: '' });
+  const [questionConfig, setQuestionConfig] = useState<QuestionConfig>({ counter: 0, questionId: 1, question: '', title: '', backgroundImageUrl: '' });
 
   useEffect(() => {
     console.log('Chipote useEffect');
@@ -45,11 +46,13 @@ export const useQuestion = (): UseQuestion => {
     const question = quizQuestions[0].question;
     const genre = quizQuestions[0].genre;
     const title = quizQuestions[0].title;
+    const backgroundImageUrl = quizQuestions[0].backgroundImageUrl;
 
     setQuestionConfig((prev) => ({
       ...prev,
       question,
       title,
+      backgroundImageUrl,
     }));
 
     const answerOptions = shuffledAnswerOptions[0];

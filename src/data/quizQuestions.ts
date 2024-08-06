@@ -15,7 +15,7 @@ interface HtmlDirectiveLabel {
 }
 
 // Define el tipo para las respuestas
-interface Answer {
+export interface Answer {
   type: string;
   content: string;
   genre: string;
@@ -30,12 +30,14 @@ interface QuizQuestion {
   question: string;
   genre: string;
   answers: Answer[];
+  backgroundImageUrl: string;
 }
 
 const quizQuestions: QuizQuestion[] = [
   {
     title: 'Game Genre',
     question: 'What genre of games do you prefer?',
+    backgroundImageUrl: '/questions.jpg',
     genre: 'initial', // Indica que es la pregunta inicial para seleccionar el género
     answers: [
       {
@@ -90,8 +92,9 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Game Franchise',
+    backgroundImageUrl: '/best-game2.jpg',
     question: 'What franchise would you rather play a game from?',
-    genre: 'general', // Género general para preguntas no específicas de género
+    genre: 'general',
     answers: [
       {
         type: 'Microsoft',
@@ -120,7 +123,8 @@ const quizQuestions: QuizQuestion[] = [
     ],
   },
   {
-    title: 'Choosing Console', // Playing With Friends
+    title: 'Choosing Console',
+    backgroundImageUrl: '/friend-console.jpg',
     question: 'Which Console would you prefer to play with friends?',
     genre: 'console',
     answers: [
@@ -160,6 +164,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Racing Franchises',
+    backgroundImageUrl: '/racing.jpg',
     question: 'Which of these Racing franchises would you prefer to play a game from?',
     genre: 'racing',
     answers: [
@@ -191,6 +196,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Best Games',
+    backgroundImageUrl: '/best-game2.jpg',
     question: 'Which of these games do you think is best?',
     genre: 'general',
     answers: [
@@ -222,6 +228,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Choose Favorite Console',
+    backgroundImageUrl: '/choose-console2.jpg',
     question: 'What console would you prefer to own?',
     genre: 'console',
     answers: [
@@ -261,6 +268,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'FPS Game',
+    backgroundImageUrl: '/fps2.jpg',
     question: 'Which first-person shooter game do you prefer?',
     genre: 'first-person-shooter',
     answers: [
@@ -292,6 +300,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Platformer Game',
+    backgroundImageUrl: '/plataformer2.jpg',
     question: 'Which platformer game do you prefer?',
     genre: 'platformer',
     answers: [
@@ -323,6 +332,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Role-Playing Game',
+    backgroundImageUrl: '/rollgame2.jpg',
     question: 'Which Role-Playing game do you prefer?',
     genre: 'role-playing',
     answers: [
@@ -354,6 +364,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Action-Adventure Game',
+    backgroundImageUrl: '/adventure-game2.jpg',
     question: 'Which Action-Adventure game do you prefer?',
     genre: 'action-adventure',
     answers: [

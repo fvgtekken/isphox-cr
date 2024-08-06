@@ -1,8 +1,13 @@
-const QuestionCount = (props: any) => {
+interface PropsQuestionCount {
+  total: number;
+  counter: number;
+}
+
+const QuestionCount = (props: PropsQuestionCount) => {
   const { total, counter } = props;
 
   return (
-    <div className='questionCount'>
+    <div className='panel-question'>
       Question <span>{counter}</span> of <span>{total}</span>
     </div>
   );

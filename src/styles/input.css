@@ -1,0 +1,54 @@
+/* Container to center the input and label */
+.center-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 350px; /* Full viewport height */
+}
+
+/* Input and label styles */
+.inputCustomLabel {
+  font-weight: bold;
+  color: #390360;
+  margin-bottom: 10px; /* Small margin below label */
+  text-align: left; /* Align text to the left */
+  width: 100%; /* Ensure the label takes full width of the container */
+}
+
+@media (max-width: 1350px) {
+  .inputCustomLabel {
+    padding: 4px;
+    background-color: #ffffff;
+  }
+}
+
+@media (max-width: 900px) {
+  .inputCustomLabel {
+    min-width: 287px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #390360;
+    margin-bottom: 10px; /* Small margin below label */
+    text-align: left; /* Align text to the left */
+    width: 100%; /* Ensure the label takes full width of the container */
+  }
+}
+
+.inputCustom {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 2px solid #b19cd9; /* Light violet border */
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 1.2rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-clip: padding-box; /* Ensure background gradient doesn't extend into padding */
+}
+
+.inputCustom:focus {
+  border-color: #6a0dad; /* Darker violet on focus */
+  box-shadow: 0 0 5px rgba(106, 13, 173, 0.5); /* Violet shadow on focus */
+  outline: none; /* Remove default focus outline */
+}

@@ -1,4 +1,4 @@
-import quizQuestions, { defaultGenre } from '../data/quizQuestions';
+import quizQuestions, { Answer, defaultGenre } from '../data/quizQuestions';
 import { AnswerConfing, QuestionConfig } from './useQuestion';
 
 interface UseNextSlideProps {
@@ -54,7 +54,7 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
 
     // For input field text
     //****************************************************** */
-    let consoleExists: any = [];
+    let consoleExists: Answer[] = [];
     if (genre === 'console') {
       consoleExists = filterAnwserOpt[counter].answers.filter((opt: any) => opt.content.toLowerCase().replace(/[\s-]+/g, '') === answer.toLowerCase().replace(/[\s-]+/g, ''));
     }
@@ -114,12 +114,14 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
     const nextAnswerOptions = filterAnswerOptions[newCounter].answers;
     const nextGenre = filterAnswerOptions[newCounter].genre;
     const nextTitle = filterAnswerOptions[newCounter].title;
+    const newBackgroundImageUrl = filterAnswerOptions[newCounter].backgroundImageUrl;
 
     setQuestionConfig({
       counter: newCounter,
       questionId: newQuestionId,
       question: nextQuestion,
       title: nextTitle,
+      backgroundImageUrl: newBackgroundImageUrl,
     });
 
     setAnswerConfig((prev) => ({

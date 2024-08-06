@@ -1,4 +1,5 @@
 import { Input, InputField } from '../common/form';
+import '../../styles/input.css';
 
 const AnswerOption = (props: any) => {
   const { typeField, htmlDirective, htmlDirectiveLabel, genre, checkedAnswers, answerType, handleAnswerSelected, handleInputField, answerContent } = props;
@@ -22,13 +23,15 @@ const AnswerOption = (props: any) => {
       )}
       {typeField === 'inputText' && (
         <>
-          <InputField
-            htmlDirective={{
-              ...htmlDirective,
-              onChange: handleInputField,
-            }}
-            htmlDirectiveLabel={{ ...htmlDirectiveLabel, htmlFor: answerType }}
-          ></InputField>
+          <div className={'center-container'}>
+            <InputField
+              htmlDirective={{
+                ...htmlDirective,
+                onChange: handleInputField,
+              }}
+              htmlDirectiveLabel={{ ...htmlDirectiveLabel, htmlFor: answerType }}
+            ></InputField>
+          </div>
         </>
       )}
     </li>

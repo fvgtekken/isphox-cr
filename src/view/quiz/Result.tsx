@@ -1,4 +1,8 @@
-const Result = (props: any) => {
+interface PropsResult {
+  quizResult: string;
+}
+
+const Result = (props: PropsResult) => {
   const { quizResult } = props;
 
   return (
