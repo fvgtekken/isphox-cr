@@ -32,6 +32,7 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
 
     if (genre === defaultGenre) {
       const filteredAnswerOptions = quizQuestions.filter((question) => checkedAnswers.includes(question.genre) || question.genre === 'console');
+      console.log('filteredAnswerOptions', filteredAnswerOptions);
 
       setAnswerConfig((prev) => ({
         ...prev,
@@ -96,6 +97,8 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
       answer,
     }));
   };
+
+  /* const newQuiz = () => {}; */
 
   const setNextQuestion = (filterAnswerOptions = [...quizQuestions]) => {
     const { questionId, counter } = questionConfig;

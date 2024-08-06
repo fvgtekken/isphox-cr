@@ -26,7 +26,7 @@ export interface Answer {
 }
 
 // Define el tipo para las preguntas
-interface QuizQuestion {
+export interface QuizQuestion {
   title: string;
   question: string;
   genre: string;

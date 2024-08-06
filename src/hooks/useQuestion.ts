@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { AnswerOption } from '../types/quizForm';
-import quizQuestions, { Answer } from '../data/questions';
+import quizQuestions, { Answer, QuizQuestion } from '../data/questions';
 
 export interface QuestionConfig {
   counter: number;
@@ -13,8 +12,8 @@ export interface QuestionConfig {
 export interface AnswerConfing {
   genre: string;
   answer: string;
-  answerOptions: AnswerOption[];
-  filterAnwserOpt: Answer[];
+  answerOptions: Answer[];
+  filterAnwserOpt: QuizQuestion[];
   answersCount: Record<string, number>;
   checkedAnswers: string[];
   errorAnswer: string;

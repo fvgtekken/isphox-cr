@@ -1,6 +1,7 @@
 import { Input, InputField } from '../common/form';
 import '../../styles/input.css';
 import type { HtmlDirective, HtmlDirectiveLabel } from '../../data/questions';
+import { ChangeEvent } from 'react';
 
 interface PropsAnswerOption {
   typeField: string;
@@ -10,8 +11,8 @@ interface PropsAnswerOption {
   answerType: string;
   checkedAnswers: string[];
   answerContent: string;
-  handleInputField: () => void;
-  handleAnswerSelected: () => void;
+  handleInputField: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleAnswerSelected: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const AnswerOption = (props: PropsAnswerOption) => {

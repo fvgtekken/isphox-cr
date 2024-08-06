@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import type { Answer } from '../../data/questions';
 import AnswerOption from './AnswerOption';
 import { Button } from '../common/Button';
@@ -19,8 +19,8 @@ interface PropsQuiz {
   answerOptions: Answer[];
   questionId: number;
   setNextSlide: () => void;
-  handleAnswerSelected: () => void;
-  handleInputField: () => void;
+  handleAnswerSelected: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleInputField: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Quiz = ({ genre, title, result, backgroundImageUrl, checkedAnswers, answerOptions, errorAnswer, questionId, question, setNextSlide, handleAnswerSelected, handleInputField }: PropsQuiz) => {
