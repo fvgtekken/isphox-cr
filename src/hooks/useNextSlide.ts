@@ -101,7 +101,6 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
   };
 
   const setNewQuiz = () => {
-    setResults(['']);
     const { initAnswerOptions, question, genre, title, description, backgroundImageUrl } = initQuestions();
 
     setQuestionConfig((prev) => ({
@@ -118,10 +117,10 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
     setAnswerConfig((prev) => ({
       ...prev,
       answerOptions,
+      answersCount: {},
       genre,
     }));
-
-    //setNextSlide();
+    setResults(['']);
   };
 
   const setNextQuestion = (filterAnswerOptions = [...quizQuestions]) => {
