@@ -11,6 +11,7 @@ import '../../styles/button.css';
 interface PropsQuiz {
   genre: string;
   title: string;
+  description: string;
   result: string;
   errorAnswer: string;
   question: string;
@@ -18,12 +19,28 @@ interface PropsQuiz {
   checkedAnswers: string[];
   answerOptions: Answer[];
   questionId: number;
+  setNewQuiz: () => void;
   setNextSlide: () => void;
   handleAnswerSelected: (event: ChangeEvent<HTMLInputElement>) => void;
   handleInputField: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Quiz = ({ genre, title, result, backgroundImageUrl, checkedAnswers, answerOptions, errorAnswer, questionId, question, setNextSlide, handleAnswerSelected, handleInputField }: PropsQuiz) => {
+const Quiz = ({
+  genre,
+  title,
+  description,
+  result,
+  backgroundImageUrl,
+  checkedAnswers,
+  answerOptions,
+  errorAnswer,
+  questionId,
+  question,
+  setNextSlide,
+  setNewQuiz,
+  handleAnswerSelected,
+  handleInputField,
+}: PropsQuiz) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const typeBackgroundImageUrl = !result ? backgroundImageUrl : `/${result}.jpg`;
@@ -41,7 +58,7 @@ const Quiz = ({ genre, title, result, backgroundImageUrl, checkedAnswers, answer
   return (
     <div key={questionId}>
       <MainTitle className={'question-panel'}>
-        <Title content={typeContent} />
+        <Title className={'question'} content={typeContent} />
       </MainTitle>
 
       <MainTitle className={'title-panel'}>
@@ -52,30 +69,33 @@ const Quiz = ({ genre, title, result, backgroundImageUrl, checkedAnswers, answer
         <LazyImage src={backgroundImageUrl} onLoad={() => setImageLoaded(true)} />
         {/*Aqui deberiamos crear una clase css que sea tipo panel de boostrap que de un efecto delicado*/}
         {!result && (
-          <ul className={`answerOptions`}>
-            {answerOptions.map((opt) => (
-              <AnswerOption
-                genre={genre}
-                typeField={opt.typeField}
-                htmlDirective={opt.htmlDirective}
-                htmlDirectiveLabel={opt.htmlDirectiveLabel}
-                key={opt.content}
-                answerContent={opt.content}
-                answerType={opt.type}
-                checkedAnswers={checkedAnswers}
-                handleAnswerSelected={handleAnswerSelected}
-                handleInputField={handleInputField}
-              />
-            ))}
-          </ul>
+          <>
+            <ul className={`answerOptions`}>
+              <div className={`answerDescription`}>{description}</div>
+              {answerOptions.map((opt) => (
+                <AnswerOption
+                  genre={genre}
+                  typeField={opt.typeField}
+                  htmlDirective={opt.htmlDirective}
+                  htmlDirectiveLabel={opt.htmlDirectiveLabel}
+                  key={opt.content}
+                  answerContent={opt.content}
+                  answerType={opt.type}
+                  checkedAnswers={checkedAnswers}
+                  handleAnswerSelected={handleAnswerSelected}
+                  handleInputField={handleInputField}
+                />
+              ))}
+            </ul>
+          </>
         )}
       </div>
       <div className={'progress-panel'}>
-        <div className={'errorMessage'}>{errorAnswer}</div>
+        <div>{errorAnswer}</div>
       </div>
 
       <div className={'button-panel'}>
-        {!result ? <Button className={'button-next'} onClick={setNextSlide} title={'Next Slide'}></Button> : <Button className={'button-next'} onClick={setNextSlide} title={'New Quiz!'}></Button>}
+        {!result ? <Button className={'button-next'} onClick={setNextSlide} title={'Next Slide'}></Button> : <Button className={'button-next'} onClick={setNewQuiz} title={'New Quiz!'}></Button>}
       </div>
     </div>
   );

@@ -1,0 +1,20 @@
+.panel-quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: #1f012c;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.panel-progress-bar {
+  background-color: #390360;
+  min-height: 28px;
+}
+
+.logo {
+  height: 40px; /* Ajusta la altura del logo según sea necesario */
+  width: auto;
+}

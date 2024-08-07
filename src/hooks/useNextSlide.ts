@@ -1,4 +1,5 @@
 import quizQuestions, { Answer, defaultGenre } from '../data/questions';
+import { initQuestions } from '../lib/quiestion';
 import { AnswerConfing, QuestionConfig } from './useQuestion';
 
 interface UseNextSlideProps {
@@ -12,6 +13,7 @@ interface UseNextSlideProps {
 
 interface UseNextSlide {
   setNextSlide: () => void | null;
+  setNewQuiz: () => void;
 }
 
 export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfig, answerConfig, setResults, getResults }: UseNextSlideProps): UseNextSlide => {
@@ -98,7 +100,29 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
     }));
   };
 
-  /* const newQuiz = () => {}; */
+  const setNewQuiz = () => {
+    setResults(['']);
+    const { initAnswerOptions, question, genre, title, description, backgroundImageUrl } = initQuestions();
+
+    setQuestionConfig((prev) => ({
+      ...prev,
+      counter: 0,
+      questionId: 1,
+      question,
+      title,
+      description,
+      backgroundImageUrl,
+    }));
+
+    const answerOptions = initAnswerOptions[0];
+    setAnswerConfig((prev) => ({
+      ...prev,
+      answerOptions,
+      genre,
+    }));
+
+    //setNextSlide();
+  };
 
   const setNextQuestion = (filterAnswerOptions = [...quizQuestions]) => {
     const { questionId, counter } = questionConfig;
@@ -117,6 +141,7 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
     const nextAnswerOptions = filterAnswerOptions[newCounter].answers;
     const nextGenre = filterAnswerOptions[newCounter].genre;
     const nextTitle = filterAnswerOptions[newCounter].title;
+    const nextDescription = filterAnswerOptions[newCounter].description;
     const newBackgroundImageUrl = filterAnswerOptions[newCounter].backgroundImageUrl;
 
     setQuestionConfig({
@@ -124,6 +149,7 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
       questionId: newQuestionId,
       question: nextQuestion,
       title: nextTitle,
+      description: nextDescription,
       backgroundImageUrl: newBackgroundImageUrl,
     });
 
@@ -138,6 +164,7 @@ export const useNextSlide = ({ setAnswerConfig, setQuestionConfig, questionConfi
   };
 
   return {
+    setNewQuiz,
     setNextSlide,
   };
 };

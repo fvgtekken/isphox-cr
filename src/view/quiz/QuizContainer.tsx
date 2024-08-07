@@ -7,14 +7,13 @@ import { useNextSlide } from '../../hooks/useNextSlide';
 import { useAnswerHandlers } from '../../hooks/useAnswerHandlers';
 import { defaultGenre } from '../../data/questions';
 import QuestionCount from './QuestionCount';
-import '../../styles/index.css';
-import '../../styles/App.css';
+import '../../styles/quizContainer.css';
 
 const QuizContainer = () => {
   const { result, getResults, setResults } = useResult();
   const { answerConfig, questionConfig, setQuestionConfig, setAnswerConfig } = useQuestion();
   const { handleAnswerSelected, handleInputField } = useAnswerHandlers(setAnswerConfig, answerConfig);
-  const { setNextSlide } = useNextSlide({
+  const { setNextSlide, setNewQuiz } = useNextSlide({
     getResults,
     setResults,
     answerConfig,
@@ -28,8 +27,9 @@ const QuizContainer = () => {
   const questionTotal = filterAnwserOpt.length;
   return (
     <div>
-      <Header className='App-header'>
-        <h2>Quiz Game!</h2>
+      <Header className='panel-quiz-header'>
+        <img src='/favicon.png' alt='Logo' className={'logo'} />
+        <h2>SiPhox Quiz Demo</h2>
       </Header>
       <div className='panel-progress-bar'>
         {genre !== defaultGenre && (
@@ -39,7 +39,7 @@ const QuizContainer = () => {
           </>
         )}
       </div>
-      <Quiz {...{ ...answerConfig, ...questionConfig, result, counter, questionTotal, setNextSlide, handleInputField, handleAnswerSelected }} />
+      <Quiz {...{ ...answerConfig, ...questionConfig, result, counter, questionTotal, setNextSlide, setNewQuiz, handleInputField, handleAnswerSelected }} />
     </div>
   );
 };

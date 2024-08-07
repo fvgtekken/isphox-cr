@@ -1,11 +1,11 @@
 interface PropsTitle {
   content: string;
-  clasName?: string;
+  className?: string;
 }
 
 const Title = (props: PropsTitle) => {
-  const { content } = props;
-  return <h2 className='question'>{content}</h2>;
+  const { content, className } = props;
+  return <h2 className={className}>{content}</h2>;
 };
 
 export default Title;

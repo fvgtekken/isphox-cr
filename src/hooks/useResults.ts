@@ -4,6 +4,7 @@ import { AnswerConfing } from './useQuestion';
 interface UseResult {
   getResults: (answerConfig: AnswerConfing) => string[];
   setResults: (result: string[]) => void;
+  setResult: any;
   result: string;
 }
 
@@ -23,5 +24,5 @@ export const useResult = (): UseResult => {
     setResult(typeResult);
   };
 
-  return { getResults, setResults, result };
+  return { getResults, setResults, setResult, result };
 };

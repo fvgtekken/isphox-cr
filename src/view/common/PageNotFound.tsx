@@ -5,7 +5,7 @@ export const PageNotFound = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/product`);
+    navigate(`/quiz`);
   };
 
   return (
@@ -16,7 +16,7 @@ export const PageNotFound = () => {
           onClick: () => {
             handleClick();
           },
-          title: 'Back to Prodcuts',
+          title: 'Back to Quiz',
           className: 'button',
         }}
       ></Button>

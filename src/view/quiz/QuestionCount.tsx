@@ -1,3 +1,5 @@
+import '../../styles/questionCount.css';
+
 interface PropsQuestionCount {
   total: number;
   counter: number;

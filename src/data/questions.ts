@@ -28,6 +28,7 @@ export interface Answer {
 // Define el tipo para las preguntas
 export interface QuizQuestion {
   title: string;
+  description: string;
   question: string;
   genre: string;
   answers: Answer[];
@@ -37,6 +38,7 @@ export interface QuizQuestion {
 const quizQuestions: QuizQuestion[] = [
   {
     title: 'Game Genre',
+    description: 'This question aims to understand your gaming preferences by identifying the genres you enjoy the most. Your response will help tailor future questions to match your interests.',
     question: 'What genre of games do you prefer?',
     backgroundImageUrl: '/questions.jpg',
     genre: 'initial', // Indica que es la pregunta inicial para seleccionar el género
@@ -93,6 +95,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Game Franchise',
+    description: 'This question seeks to determine your favorite gaming franchises. Your answer will help customize future questions to align with the franchises you prefer.',
     backgroundImageUrl: '/best-game2.jpg',
     question: 'What franchise would you rather play a game from?',
     genre: 'general',
@@ -133,6 +136,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Choosing Console',
+    description: 'This question aims to find out which gaming console you prefer for playing with friends. Your response will help tailor future questions to suit your console preference',
     backgroundImageUrl: '/friend-console.jpg',
     question: 'Which Console would you prefer to play with friends?',
     genre: 'console',
@@ -318,7 +322,8 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Racing Franchises',
-    backgroundImageUrl: '/racing.jpg',
+    description: 'This question seeks to identify your preferred racing game franchise. Your answer will help customize future questions to align with the racing franchises you enjoy the most',
+    backgroundImageUrl: '/racing2.jpg',
     question: 'Which of these Racing franchises would you prefer to play a game from?',
     genre: 'racing',
     answers: [
@@ -358,6 +363,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Best Games',
+    description: 'This question aims to determine which of the listed games you consider the best. Your response will help tailor future questions to reflect your gaming preferences.',
     backgroundImageUrl: '/best-game2.jpg',
     question: 'Which of these games do you think is best?',
     genre: 'general',
@@ -398,6 +404,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Choose Favorite Console',
+    description: 'This question seeks to understand your preference for owning a particular gaming console. Your answer will help customize future questions based on your console preference.',
     backgroundImageUrl: '/choose-console2.jpg',
     question: 'What console would you prefer to own?',
     genre: 'console',
@@ -583,6 +590,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'FPS Game',
+    description: 'This question aims to find out your favorite first-person shooter game. Your response will help tailor future questions to match your gaming preferences.',
     backgroundImageUrl: '/fps2.jpg',
     question: 'Which first-person shooter game do you prefer?',
     genre: 'first-person-shooter',
@@ -623,6 +631,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Platformer Game',
+    description: 'This question seeks to identify your preferred platformer game. Your answer will help customize future questions to align with your gaming interests.',
     backgroundImageUrl: '/plataformer2.jpg',
     question: 'Which platformer game do you prefer?',
     genre: 'platformer',
@@ -663,6 +672,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Role-Playing Game',
+    description: 'This question aims to determine your favorite role-playing game. Your response will help tailor future questions to suit your gaming preferences',
     backgroundImageUrl: '/rollgame2.jpg',
     question: 'Which Role-Playing game do you prefer?',
     genre: 'role-playing',
@@ -703,6 +713,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     title: 'Action-Adventure Game',
+    description: 'This question seeks to find out your preferred action-adventure game. Your answer will help customize future questions to align with your gaming interests.',
     backgroundImageUrl: '/adventure-game2.jpg',
     question: 'Which Action-Adventure game do you prefer?',
     genre: 'action-adventure',

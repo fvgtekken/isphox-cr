@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import quizQuestions, { Answer, QuizQuestion } from '../data/questions';
+import { Answer, QuizQuestion } from '../data/questions';
+import { initQuestions } from '../lib/quiestion';
 
 export interface QuestionConfig {
   counter: number;
   questionId: number;
   question: string;
   title: string;
+  description: string;
   backgroundImageUrl: string;
 }
 
@@ -36,23 +38,20 @@ export const useQuestion = (): UseQuestion => {
     checkedAnswers: [],
     errorAnswer: '',
   });
-  const [questionConfig, setQuestionConfig] = useState<QuestionConfig>({ counter: 0, questionId: 1, question: '', title: '', backgroundImageUrl: '' });
+  const [questionConfig, setQuestionConfig] = useState<QuestionConfig>({ counter: 0, questionId: 1, question: '', title: '', description: '', backgroundImageUrl: '' });
 
   useEffect(() => {
-    const shuffledAnswerOptions = quizQuestions.map((question) => question.answers);
-    const question = quizQuestions[0].question;
-    const genre = quizQuestions[0].genre;
-    const title = quizQuestions[0].title;
-    const backgroundImageUrl = quizQuestions[0].backgroundImageUrl;
+    const { initAnswerOptions, question, genre, title, description, backgroundImageUrl } = initQuestions();
 
     setQuestionConfig((prev) => ({
       ...prev,
       question,
       title,
+      description,
       backgroundImageUrl,
     }));
 
-    const answerOptions = shuffledAnswerOptions[0];
+    const answerOptions = initAnswerOptions[0];
     setAnswerConfig((prev) => ({
       ...prev,
       answerOptions,

@@ -19,7 +19,7 @@ const AnswerOption = (props: PropsAnswerOption) => {
   const { typeField, htmlDirective, htmlDirectiveLabel, genre, checkedAnswers, answerType, handleAnswerSelected, handleInputField, answerContent } = props;
 
   return (
-    <li className='answerOption'>
+    <li className={'answerOption'}>
       {typeField === 'input' && (
         <>
           <Input
