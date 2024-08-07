@@ -8,6 +8,7 @@ import Title from '../common/Title';
 import '../../styles/quiz.css';
 import '../../styles/button.css';
 import Spinner from '../common/Spinner';
+import FooterPanel from '../common/FooterPanel';
 
 interface PropsQuiz {
   genre: string;
@@ -103,9 +104,7 @@ const Quiz = ({
           </>
         )}
       </div>
-      <div className={'progress-panel'}>
-        <div>{errorAnswer}</div>
-      </div>
+      <FooterPanel className={'footer-panel'} content={errorAnswer} />
       <div className={'button-panel'}>
         {!result ? <Button className={'button-next'} onClick={setNextSlide} title={'Next Slide'}></Button> : <Button className={'button-next'} onClick={setNewQuiz} title={'New Quiz!'}></Button>}
       </div>
