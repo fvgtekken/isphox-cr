@@ -11,7 +11,6 @@ const LazyImage = ({ src, onLoadStart, onLoad }: PropsLazyImage) => {
     const img = new Image();
     img.src = src;
 
-    // Llama a onLoadStart al comenzar la carga
     img.onloadstart = () => {
       if (onLoadStart) onLoadStart();
     };

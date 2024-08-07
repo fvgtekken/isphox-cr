@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 interface PropsHeader {
   className: string;
-  children: ReactNode; // Mejor opción en lugar de 'any'
+  children: ReactNode;
 }
 
 const MainTitle = ({ children, className }: PropsHeader) => {

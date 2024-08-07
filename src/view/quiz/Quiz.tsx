@@ -33,8 +33,8 @@ const Quiz = ({ genre, description, result, backgroundImageUrl, checkedAnswers, 
     backgroundPosition: !result ? 'right center' : 'center center',
     backgroundSize: !result ? 'contain' : 'cover',
     backgroundRepeat: 'no-repeat',
-    opacity: imageLoaded ? 1 : 0.3, // Adjust the opacity based on image loading
-    transition: imageLoaded ? 'opacity 1s ease-in-out' : '', // Smooth transition effect
+    opacity: imageLoaded ? 1 : 0.3,
+    transition: imageLoaded ? 'opacity 1s ease-in-out' : '',
   };
 
   return (
