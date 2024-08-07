@@ -78,6 +78,7 @@ const Quiz = ({
             <div className='loading-spinner'></div>
           </div>
         )}
+
         <LazyImage
           src={typeBackgroundImageUrl}
           onLoadStart={() => setLoading(true)}
