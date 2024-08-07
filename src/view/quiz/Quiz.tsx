@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useEffect } from 'react';
 import type { Answer } from '../../data/questions';
 import AnswerOption from './AnswerOption';
 import { Button } from '../common/Button';
@@ -42,9 +42,10 @@ const Quiz = ({
   handleInputField,
 }: PropsQuiz) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const typeBackgroundImageUrl = !result ? backgroundImageUrl : `/${result}.jpg`;
-  const typeContent = !result ? question : ` You Prefer ${result}!`;
+  const typeContent = !result ? question : `You Prefer ${result}!`;
   const typeTitle = !result ? title : ``;
 
   const panelContainerStyle = {
@@ -52,11 +53,17 @@ const Quiz = ({
     backgroundPosition: !result ? 'right center' : 'center center',
     backgroundSize: !result ? 'contain' : 'cover',
     backgroundRepeat: 'no-repeat',
-    transition: 'background-image 0.3s ease-in-out',
+    opacity: imageLoaded ? 1 : 0.3, // Adjust the opacity based on image loading
+    transition: imageLoaded ? 'opacity 1s ease-in-out' : '', // Smooth transition effect
   };
 
+  useEffect(() => {
+    setImageLoaded(false);
+    setLoading(true);
+  }, [typeBackgroundImageUrl]);
+
   return (
-    <div key={questionId}>
+    <div key={questionId} className='quiz-container'>
       <MainTitle className={'question-panel'}>
         <Title className={'question'} content={typeContent} />
       </MainTitle>
@@ -66,8 +73,19 @@ const Quiz = ({
       </MainTitle>
 
       <div className={'panel-container'} style={panelContainerStyle}>
-        <LazyImage src={backgroundImageUrl} onLoad={() => setImageLoaded(true)} />
-        {/*Aqui deberiamos crear una clase css que sea tipo panel de boostrap que de un efecto delicado*/}
+        {loading && (
+          <div className='loading-overlay'>
+            <div className='loading-spinner'></div>
+          </div>
+        )}
+        <LazyImage
+          src={typeBackgroundImageUrl}
+          onLoadStart={() => setLoading(true)}
+          onLoad={() => {
+            setImageLoaded(true);
+            setLoading(false);
+          }}
+        />
         {!result && (
           <>
             <ul className={`answerOptions`}>
