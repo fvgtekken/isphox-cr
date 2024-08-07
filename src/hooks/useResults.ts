@@ -20,7 +20,7 @@ export const useResult = (): UseResult => {
   };
 
   const setResults = (result: string[]) => {
-    const typeResult = result.length === 1 ? result[0] : 'Diverse Preferences';
+    const typeResult = result.length === 1 ? result[0] : 'a Broad Spectrum of Options!';
     setResult(typeResult);
   };
 
