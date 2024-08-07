@@ -67,18 +67,11 @@ const Quiz = ({
       <MainTitle className={'question-panel'}>
         <Title className={'question'} content={typeContent} />
       </MainTitle>
-
       <MainTitle className={'title-panel'}>
         <h3>{typeTitle}</h3>
       </MainTitle>
-
       <div className={'panel-container'} style={panelContainerStyle}>
-        {loading && (
-          <div className='loading-overlay'>
-            <div className='loading-spinner'></div>
-          </div>
-        )}
-
+        {loading && <div className='loading-spinner'></div>}
         <LazyImage
           src={typeBackgroundImageUrl}
           onLoadStart={() => setLoading(true)}
@@ -112,7 +105,6 @@ const Quiz = ({
       <div className={'progress-panel'}>
         <div>{errorAnswer}</div>
       </div>
-
       <div className={'button-panel'}>
         {!result ? <Button className={'button-next'} onClick={setNextSlide} title={'Next Slide'}></Button> : <Button className={'button-next'} onClick={setNewQuiz} title={'New Quiz!'}></Button>}
       </div>
