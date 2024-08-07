@@ -7,6 +7,7 @@ import MainTitle from '../common/MainTitle';
 import Title from '../common/Title';
 import '../../styles/quiz.css';
 import '../../styles/button.css';
+import Spinner from '../common/Spinner';
 
 interface PropsQuiz {
   genre: string;
@@ -71,7 +72,7 @@ const Quiz = ({
         <h3>{typeTitle}</h3>
       </MainTitle>
       <div className={'panel-container'} style={panelContainerStyle}>
-        {loading && <div className='loading-spinner'></div>}
+        {loading && <Spinner className={'loading-spinner'} />}
         <LazyImage
           src={typeBackgroundImageUrl}
           onLoadStart={() => setLoading(true)}
