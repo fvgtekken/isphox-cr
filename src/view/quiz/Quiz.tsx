@@ -1,5 +1,6 @@
-import { ChangeEvent, useState, useEffect } from 'react';
+import { ChangeEvent } from 'react';
 import type { Answer } from '../../data/questions';
+import { useLoadImage } from '../../hooks/useLoadImage';
 import AnswerOption from './AnswerOption';
 import LazyImage from '../common/LazyImage';
 import Spinner from '../common/Spinner';
@@ -24,10 +25,8 @@ interface PropsQuiz {
 }
 
 const Quiz = ({ genre, description, result, backgroundImageUrl, checkedAnswers, answerOptions, questionId, handleAnswerSelected, handleInputField }: PropsQuiz) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [loading, setLoading] = useState(true);
-
   const typeBackgroundImageUrl = !result ? backgroundImageUrl : `/${result}.jpg`;
+  const { imageLoaded, loading, setImageLoaded, setLoading } = useLoadImage(typeBackgroundImageUrl);
 
   const panelContainerStyle = {
     backgroundImage: imageLoaded ? `url(${typeBackgroundImageUrl})` : 'none',
@@ -37,11 +36,6 @@ const Quiz = ({ genre, description, result, backgroundImageUrl, checkedAnswers, 
     opacity: imageLoaded ? 1 : 0.3, // Adjust the opacity based on image loading
     transition: imageLoaded ? 'opacity 1s ease-in-out' : '', // Smooth transition effect
   };
-
-  useEffect(() => {
-    setImageLoaded(false);
-    setLoading(true);
-  }, [typeBackgroundImageUrl]);
 
   return (
     <div key={questionId} className='quiz-container'>

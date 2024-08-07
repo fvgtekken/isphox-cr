@@ -1,5 +1,4 @@
 import Quiz from './Quiz';
-import Header from '../common/MainTitle';
 import ProgressBar from '../common/ProgressBar';
 import { useQuestion } from '../../hooks/useQuestion';
 import { useResult } from '../../hooks/useResults';
@@ -7,11 +6,11 @@ import { useNextSlide } from '../../hooks/useNextSlide';
 import { useAnswerHandlers } from '../../hooks/useAnswerHandlers';
 import { defaultGenre } from '../../data/questions';
 import QuestionCount from './QuestionCount';
-import '../../styles/quizContainer.css';
 import MainTitle from '../common/MainTitle';
 import Title from '../common/Title';
 import { Button } from '../common/Button';
 import FooterPanel from '../common/FooterPanel';
+import '../../styles/quizContainer.css';
 
 const QuizContainer = () => {
   const { result, getResults, setResults } = useResult();
@@ -33,10 +32,10 @@ const QuizContainer = () => {
   const questionTotal = filterAnwserOpt.length;
   return (
     <div>
-      <Header className='panel-quiz-header'>
+      <MainTitle className='panel-quiz-header'>
         <img src='/favicon.png' alt='Logo' className={'logo'} />
         <h2>SiPhox Quiz Demo</h2>
-      </Header>
+      </MainTitle>
       <div className='panel-progress-bar'>
         {genre !== defaultGenre && (
           <>

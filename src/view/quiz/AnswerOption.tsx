@@ -27,7 +27,6 @@ const AnswerOption = (props: PropsAnswerOption) => {
               ...htmlDirective,
               checked: checkedAnswers.includes(answerType),
               id: answerType,
-
               value: JSON.stringify({ answer: answerType, genre }),
               onChange: handleAnswerSelected,
             }}
