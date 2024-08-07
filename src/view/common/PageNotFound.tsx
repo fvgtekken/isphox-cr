@@ -5,7 +5,7 @@ export const PageNotFound = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/quiz`);
+    navigate(`/`);
   };
 
   return (
