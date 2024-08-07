@@ -11,6 +11,7 @@ import Title from '../common/Title';
 import { Button } from '../common/Button';
 import FooterPanel from '../common/FooterPanel';
 import '../../styles/quizContainer.css';
+import '../../styles/button.css';
 
 const QuizContainer = () => {
   const { result, getResults, setResults } = useResult();

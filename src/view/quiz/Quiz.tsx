@@ -5,7 +5,6 @@ import AnswerOption from './AnswerOption';
 import LazyImage from '../common/LazyImage';
 import Spinner from '../common/Spinner';
 import '../../styles/quiz.css';
-import '../../styles/button.css';
 
 interface PropsQuiz {
   genre: string;
